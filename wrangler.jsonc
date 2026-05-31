@@ -19,6 +19,14 @@
     "binding": "ASSETS"
   },
 
+  "vars": {
+    "NEXTAUTH_URL": "https://tracknit.com",
+    "NEXT_PUBLIC_SITE_URL": "https://tracknit.com",
+    "NEXT_PUBLIC_WP_URL": "https://api.tracknit.com",
+    "NEXT_PUBLIC_API_URL": "https://api.tracknit.com/wp-json/tracknit/v1",
+    "GOOGLE_CLIENT_ID": "679629717272-t2j8hev9vmhdl12783sif65qnu0mjupf.apps.googleusercontent.com"
+  },
+
   "routes": [
     {
       "pattern": "tracknit.com",
