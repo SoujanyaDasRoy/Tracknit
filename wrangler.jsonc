@@ -1,16 +1,30 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "tracknit",
+  "main": ".open-next/worker.js",
   "compatibility_date": "2026-05-31",
-  "observability": {
-    "enabled": true
-  },
+
   "compatibility_flags": [
     "nodejs_compat"
   ],
-  "main": ".open-next/worker.js",
+
+  "observability": {
+    "enabled": true
+  },
+
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
-  }
+  },
+
+  "routes": [
+    {
+      "pattern": "tracknit.com/*",
+      "zone_name": "tracknit.com"
+    },
+    {
+      "pattern": "www.tracknit.com/*",
+      "zone_name": "tracknit.com"
+    }
+  ]
 }
