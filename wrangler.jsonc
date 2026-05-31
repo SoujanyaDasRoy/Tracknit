@@ -21,12 +21,12 @@
 
   "routes": [
     {
-      "pattern": "tracknit.com/*",
-      "zone_name": "tracknit.com"
+      "pattern": "tracknit.com",
+      "custom_domain": true
     },
     {
-      "pattern": "www.tracknit.com/*",
-      "zone_name": "tracknit.com"
+      "pattern": "www.tracknit.com",
+      "custom_domain": true
     }
   ]
 }
