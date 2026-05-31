@@ -1,5 +1,0 @@
-# Cloudflare Pages API Reverse Proxy
-# Transparently routes frontend /api/backend/* calls to Hostinger WordPress backend
-# This establishes Same-Origin cookies, zero-CORS requests, and tight edge security.
-
-/api/backend/*  https://your-backend-domain.com/wp-json/tracknit/v1/:splat  200
