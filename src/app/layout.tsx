@@ -3,6 +3,7 @@ import './globals.css'
 import AuthProvider from '@/components/providers/AuthProvider'
 import NavbarWrapper from '@/components/layout/NavbarWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
+import GlobalOverlays from '@/components/layout/GlobalOverlays'
 import { Inter, Space_Grotesk, Bodoni_Moda, Geist } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
@@ -20,8 +21,6 @@ export const viewport = {
   maximumScale: 1,
 }
 
-import AudioPlayer from '@/components/AudioPlayer'
-import CartDrawer from '@/components/library/CartDrawer'
 import { cn } from "@/lib/utils";
 import { TooltipProvider } from '@/components/ui/tooltip';
 
@@ -36,9 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("dark", inter.variable, spaceGrotesk.variable, bodoniModa.variable, "font-sans", geist.variable)}>
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
         <link href="https://fonts.cdnfonts.com/css/roslane" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght@600;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body selection:bg-[#3b82f6]/30 selection:text-white">
         <AuthProvider>
@@ -50,12 +47,10 @@ export default function RootLayout({
               </main>
               <FooterWrapper />
             </div>
-            <AudioPlayer />
-            <CartDrawer />
+            <GlobalOverlays />
           </TooltipProvider>
         </AuthProvider>
       </body>
     </html>
   )
 }
-

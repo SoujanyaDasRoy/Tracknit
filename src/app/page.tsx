@@ -1,47 +1,45 @@
-"use client";
-
 import Link from "next/link";
 
 const usageCategories = [
   {
     title: "YouTube & Social",
     description: "Fully cleared for monetization on all platforms. No claims, just creation.",
-    image: "https://images.unsplash.com/photo-1492724441997-5dc865305da7?q=80&w=1470&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=600&q=70",
   },
   {
     title: "Podcasts & Audio",
     description: "Intros, outros, and background beds. Sound as professional as your message.",
-    image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=1374&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=600&q=70",
   },
   {
     title: "Advertising",
     description: "Engage your audience with high-impact sounds for commercials and global ads.",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1470&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=70",
   },
   {
     title: "TV & Film",
     description: "Cinematic scores and soundscapes for indie films and broadcast television.",
-    image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1459&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=70",
   },
   {
     title: "Gaming & Streams",
     description: "Atmospheric tracks for gameplay, Twitch streams, and virtual worlds.",
-    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1470&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=70",
   },
   {
     title: "Corporate & Apps",
     description: "Modern audio for brand videos, apps, and professional internal presentations.",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1469&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=70",
   },
   {
     title: "Metaverse & VR",
     description: "Immersive spatial audio for virtual worlds, AR experiences, and the metaverse.",
-    image: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?q=80&w=1470&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=600&q=70",
   },
   {
     title: "Events & In-Store",
     description: "High-energy tracks for live events, retail spaces, and fashion shows.",
-    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1470&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=70",
   },
 ];
 
@@ -80,7 +78,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20 z-10" />
           <div className="absolute inset-0 z-10 bg-gradient-to-tr from-[#7CFF00]/15 via-transparent to-white/5 opacity-80 animate-gradient pointer-events-none" />
           <img
-            src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=90&w=2070&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=75"
             alt="Studio equipment"
             className="w-full h-full object-cover relative z-0"
           />
@@ -158,7 +156,7 @@ export default function Home() {
             <div className="lg:w-1/2 pt-0 md:pt-4 lg:pt-0">
               <div className="relative aspect-[16/18] rounded-[2.5rem] overflow-hidden shadow-2xl group">
                 <img
-                  src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1470&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=800&q=75"
                   alt="Tracknit Studio"
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
@@ -217,7 +215,7 @@ export default function Home() {
           <div className="absolute top-[20%] left-[10%] w-[500px] h-[500px] bg-[#7CFF00]/10 blur-[140px] z-10 rounded-full animate-pulse" />
           <div className="absolute bottom-[20%] right-[10%] w-[400px] h-[400px] bg-white/5 blur-[120px] z-10 rounded-full" />
           <img
-            src="https://images.unsplash.com/photo-1459749411177-042180ce673c?q=80&w=2670&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1459749411177-042180ce673c?auto=format&fit=crop&w=1200&q=70"
             alt="CTA Visual"
             className="w-full h-full object-cover opacity-20 grayscale scale-110 relative z-0"
           />
