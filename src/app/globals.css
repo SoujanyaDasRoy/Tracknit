@@ -1,0 +1,298 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-body: var(--font-inter), sans-serif;
+  --font-headline: var(--font-inter), sans-serif;
+  --font-display: var(--font-space-grotesk), sans-serif;
+  --font-serif: var(--font-bodoni-moda), serif;
+
+  /* Tracknit Soft Green Palette - Professional Edition */
+  --color-primary: #68d884;
+  /* Soft green - base */
+  --color-on-primary: #053912;
+  --color-primary-container: #4dc16d;
+  /* Darker shade for containers */
+  --color-on-primary-container: #0d2512;
+  --color-primary-light: #8ce8ad;
+  /* Lighter shade for hover/active */
+  --color-primary-dark: #34a655;
+  /* Darker shade for pressed */
+  --color-primary-dim: rgba(104, 216, 132, 0.12);
+  /* Subtle surface */
+
+  --color-secondary: #a8a6ac;
+  --color-on-secondary: #1e1e20;
+  --color-secondary-container: #1f1f23;
+  --color-on-secondary-container: #c7c5c8;
+
+  --color-surface: #0d0d10;
+  /* Slightly lighter than pure black */
+  --color-surface-dim: #0a0a0c;
+  --color-surface-bright: #1d1d20;
+  --color-surface-container-lowest: #08080a;
+  --color-surface-container-low: #121215;
+  --color-surface-container: #1a1a1f;
+  /* Elevated cards */
+  --color-surface-container-high: #24242a;
+  /* Active states */
+  --color-surface-container-highest: #2d2d34;
+  /* Floating elements */
+  --color-surface-variant: #2a2d3a;
+  /* Borders/dividers */
+  --color-on-surface: #e5e9f0;
+  /* Main text */
+  --color-on-surface-variant: #8f9ba8;
+  /* Subtle text */
+  --color-outline: rgba(255, 255, 255, 0.08);
+  --color-outline-variant: rgba(255, 255, 255, 0.12);
+  --color-inverse-surface: #f0f5ed;
+
+  --color-background: #0d0d10;
+  --color-on-background: #e5e9f0;
+
+  /* Tracknit Waveform Colors */
+  --waveform-bg: rgba(255, 255, 255, 0.1);
+  /* Inactive waveform */
+  --waveform-active: #68d884;
+  /* Active waveform */
+  --waveform-shadow: rgba(104, 216, 132, 0.4);
+  /* Glow effect */
+  --waveform-gradient: linear-gradient(90deg, #68d884, #4dc16d);
+
+  /* SFX Accent Colors */
+  --color-sfx-accent: #4f56fd;
+  --color-on-sfx-accent: #ffffff;
+  --color-sfx-container: #3a40c1;
+  --color-sfx-dim: rgba(79, 86, 253, 0.12);
+
+  /* Chart Colors */
+  --chart-1: #68d884;
+  /* Primary */
+  --chart-2: #4dc16d;
+  /* Primary variant */
+  --chart-3: #34a655;
+  /* Subtle variant */
+  --chart-4: #8ce8ad;
+  /* Secondary variant */
+  --chart-5: #238a42;
+  /* Least prominent */
+
+  --radius-DEFAULT: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+}
+
+@layer base {
+  :root {
+    --background: #080808;
+    --foreground: #F0F5ED;
+  }
+
+  body {
+    background-color: #080808;
+    color: #F0F5ED;
+    font-family: var(--font-body);
+    @apply bg-background text-foreground;
+  }
+
+  html ::selection,
+  body ::selection,
+  *::selection {
+    background-color: rgba(104, 216, 132, 0.3) !important;
+    color: #000000 !important;
+  }
+
+  html ::-moz-selection,
+  body ::-moz-selection,
+  *::-moz-selection {
+    background-color: rgba(104, 216, 132, 0.3) !important;
+    color: #000000 !important;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans;
+  }
+}
+
+@keyframes gradient-xy {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@layer utilities {
+  .animate-gradient {
+    animation: gradient-xy 15s ease infinite;
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 20px rgba(124, 255, 0, 0.2);
+  }
+
+  .neon-glow-strong:hover {
+    box-shadow: 0 0 30px rgba(124, 255, 0, 0.4);
+  }
+
+  .text-gradient-green {
+    background: linear-gradient(180deg, #F0F5ED 0%, #7CFF00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .glass-nav {
+    backdrop-filter: blur(16px);
+    background: rgba(8, 8, 8, 0.8);
+  }
+
+  .soft-neon-orb {
+    background: radial-gradient(circle, rgba(124, 255, 0, 0.15) 0%, rgba(124, 255, 0, 0) 70%);
+    filter: blur(40px);
+  }
+
+  .glow-primary {
+    text-shadow: 0 0 10px rgba(124, 255, 0, 0.4);
+  }
+
+  .glow-box {
+    box-shadow: 0 0 15px rgba(124, 255, 0, 0.3);
+  }
+
+  .bg-primary-soft {
+    background-color: rgba(124, 255, 0, 0.05);
+  }
+}
+
+/* ─── shadcn/ui theme tokens mapped to Tracknit brand ─── */
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Tracknit Dark Theme — mapped to shadcn CSS variables */
+:root {
+  --background: #0d0d10;
+  --foreground: #e5e9f0;
+  --card: #121215;
+  --card-foreground: #e5e9f0;
+  --popover: #121215;
+  --popover-foreground: #e5e9f0;
+  --primary: #68d884;
+  /* Soft green base */
+  --primary-foreground: #0d0d10;
+  --secondary: #1a1a1f;
+  --secondary-foreground: #e5e9f0;
+  --muted: #16161a;
+  --muted-foreground: rgba(229, 233, 240, 0.5);
+  --accent: #1d1d22;
+  --accent-foreground: #e5e9f0;
+  --destructive: #ff6b6b;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: rgba(104, 216, 132, 0.3);
+  /* Soft green ring */
+  --chart-1: #68d884;
+  --chart-2: #4dc16d;
+  --chart-3: #8ce8ad;
+  --chart-4: #34a655;
+  --chart-5: #238a42;
+  --radius: 0.625rem;
+  --sidebar: #0d0d10;
+  --sidebar-foreground: #e5e9f0;
+  --sidebar-primary: #68d884;
+  --sidebar-primary-foreground: #0d0d10;
+  --sidebar-accent: #16161a;
+  --sidebar-accent-foreground: #e5e9f0;
+  --sidebar-border: rgba(255, 255, 255, 0.06);
+  --sidebar-ring: rgba(104, 216, 132, 0.3);
+  --waveform-bg: rgba(255, 255, 255, 0.1);
+  --waveform-active: #68d884;
+  --waveform-progress: #4dc16d;
+}
+
+/* Dark mode overrides (same as root since Tracknit is dark-first) */
+.dark {
+  --background: #080808;
+  --foreground: #F0F5ED;
+  --card: #0e0e0e;
+  --card-foreground: #F0F5ED;
+  --popover: #0e0e0e;
+  --popover-foreground: #F0F5ED;
+  --primary: #7CFF00;
+  --primary-foreground: #080808;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #F0F5ED;
+  --muted: #181818;
+  --muted-foreground: rgba(240, 245, 237, 0.5);
+  --accent: #1f1f1f;
+  --accent-foreground: #F0F5ED;
+  --destructive: #ff4444;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: rgba(124, 255, 0, 0.3);
+  --chart-1: #7CFF00;
+  --chart-2: #5bbf6b;
+  --chart-3: #3d8c4e;
+  --chart-4: #2a6638;
+  --chart-5: #1a4024;
+  --sidebar: #0a0a0a;
+  --sidebar-foreground: #F0F5ED;
+  --sidebar-primary: #7CFF00;
+  --sidebar-primary-foreground: #080808;
+  --sidebar-accent: #181818;
+  --sidebar-accent-foreground: #F0F5ED;
+  --sidebar-border: rgba(255, 255, 255, 0.06);
+  --sidebar-ring: rgba(124, 255, 0, 0.3);
+}
