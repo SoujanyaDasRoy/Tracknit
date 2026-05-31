@@ -58,7 +58,7 @@ const renderPlanBadge = (tier: string) => {
 
 // ─── Circular Avatar Component (Using the specified Flaticon icon) ──
 function Avatar({ src, size = 32 }: { src?: string | null; size?: number }) {
-  // Specified Flaticon humanoid user icon (ID: 16797245)
+  const isFallback = !src;
   const iconUrl = src || "https://cdn-icons-png.flaticon.com/512/16797/16797245.png";
   
   return (
@@ -79,8 +79,11 @@ function Avatar({ src, size = 32 }: { src?: string | null; size?: number }) {
         <img 
           src={iconUrl} 
           alt="avatar" 
-          // filter invert-[0.95] converts the dark flaticon icon to an elegant premium off-white
-          className="w-full h-full object-contain filter invert-[0.95] brightness-[1.1] opacity-90 p-[5px] transition-all duration-300" 
+          className={
+            isFallback
+              ? "w-full h-full object-contain filter invert-[0.95] brightness-[1.1] opacity-90 p-[5px] transition-all duration-300"
+              : "w-full h-full object-cover transition-all duration-300"
+          }
         />
         {/* Soft metallic sheen reflection overlay */}
         <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent pointer-events-none" />

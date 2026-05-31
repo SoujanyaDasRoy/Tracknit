@@ -85,17 +85,17 @@ export default function RegisterPage() {
             <SocialButton 
               icon={<GoogleIcon />} 
               label="Google" 
-              onClick={() => signIn("google", { callbackUrl: "/pricing" })} 
+              onClick={() => signIn("google", { callbackUrl: "/library/royalty-free-music" })} 
             />
             <SocialButton 
               icon={<AppleIcon />} 
               label="Apple" 
-              onClick={() => signIn("apple", { callbackUrl: "/pricing" })} 
+              onClick={() => signIn("apple", { callbackUrl: "/library/royalty-free-music" })} 
             />
             <SocialButton 
               icon={<DiscordIcon />} 
               label="Discord" 
-              onClick={() => signIn("discord", { callbackUrl: "/pricing" })} 
+              onClick={() => signIn("discord", { callbackUrl: "/library/royalty-free-music" })} 
             />
           </div>
         </div>
