@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sonic Curator - Music Discovery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .waveform-bar {
+            transition: height 0.2s ease, background-color 0.2s ease;
+        }
+        .sidebar-item-active {
+            background: linear-gradient(90deg, rgba(119, 220, 132, 0.08) 0%, rgba(119, 220, 132, 0) 100%);
+            border-left: 2px solid #77dc84;
+        }
+        .waveform-glow {
+            filter: drop-shadow(0 0-4px rgba(119, 220, 132, 0.4));
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a2a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #333;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-background": "#e5e2e1",
+                      "outline-variant": "#3f4a3e",
+                      "on-secondary-fixed": "#1b1b1d",
+                      "tertiary": "#ffb1c3",
+                      "surface-container": "#181818",
+                      "primary": "#77dc84",
+                      "on-secondary-fixed-variant": "#474649",
+                      "surface-container-low": "#121212",
+                      "surface-dim": "#0a0a0a",
+                      "primary-fixed-dim": "#77dc84",
+                      "surface-container-highest": "#282828",
+                      "surface-container-high": "#1f1f1f",
+                      "on-surface": "#e5e2e1",
+                      "on-primary-fixed": "#002108",
+                      "on-primary-container": "#004a1a",
+                      "on-tertiary-container": "#78193c",
+                      "tertiary-fixed": "#ffd9e0",
+                      "secondary-container": "#2a2a2a",
+                      "tertiary-fixed-dim": "#ffb1c3",
+                      "error-container": "#93000a",
+                      "inverse-on-surface": "#313030",
+                      "surface-variant": "#222222",
+                      "primary-container": "#5bbf6b",
+                      "secondary-fixed": "#e4e2e4",
+                      "tertiary-container": "#ff84a6",
+                      "on-surface-variant": "#becaba",
+                      "error": "#ffb4ab",
+                      "on-tertiary-fixed": "#3f0019",
+                      "surface-container-lowest": "#080808",
+                      "primary-fixed": "#93f99e",
+                      "background": "#0a0a0a",
+                      "on-secondary-container": "#b6b4b7",
+                      "surface-bright": "#2c2c2c",
+                      "surface-tint": "#77dc84",
+                      "outline": "#889486",
+                      "on-tertiary": "#63062d",
+                      "secondary": "#c8c6c8",
+                      "on-secondary": "#303032",
+                      "on-primary-fixed-variant": "#00531e",
+                      "surface": "#0a0a0a",
+                      "on-primary": "#003912",
+                      "inverse-primary": "#006e2a",
+                      "secondary-fixed-dim": "#c8c6c8",
+                      "on-tertiary-fixed-variant": "#822143",
+                      "inverse-surface": "#e5e2e1",
+                      "on-error": "#690005",
+                      "on-error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.75rem",
+                      "lg": "1rem",
+                      "xl": "1.25rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Epilogue"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 antialiased">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar Component -->
+<aside class="h-screen w-64 left-0 top-0 fixed bg-surface-container-lowest flex flex-col z-50 border-r border-neutral-900/40">
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 rounded-xl bg-primary flex items-center justify-center shadow-[0_0_15px_rgba(119,220,132,0.3)]">
+<span class="material-symbols-outlined text-neutral-950 font-bold text-sm" data-icon="waves">waves</span>
+</div>
+<div class="text-lg font-black text-neutral-100 font-headline tracking-tighter">The Curator</div>
+</div>
+<div class="flex-1 px-4 py-2 space-y-8 overflow-y-auto">
+<!-- Discovery Section -->
+<div>
+<div class="px-2 mb-3 text-[10px] uppercase tracking-[0.2em] font-bold text-neutral-600">Discovery</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 text-primary sidebar-item-active px-4 py-2.5 rounded-r-xl cursor-pointer transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="explore">explore</span>
+<span class="font-medium text-sm">Discover</span>
+</a>
+<a class="flex items-center gap-3 text-neutral-500 px-4 py-2.5 hover:text-neutral-200 hover:bg-neutral-900/30 rounded-xl transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="trending_up">trending_up</span>
+<span class="font-medium text-sm">Trending</span>
+</a>
+<a class="flex items-center gap-3 text-neutral-500 px-4 py-2.5 hover:text-neutral-200 hover:bg-neutral-900/30 rounded-xl transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-medium text-sm">For You</span>
+</a>
+</nav>
+</div>
+<!-- Studio Hub Section -->
+<div>
+<div class="px-2 mb-3 text-[10px] uppercase tracking-[0.2em] font-bold text-neutral-600">Studio Hub</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 text-neutral-500 px-4 py-2.5 hover:text-neutral-200 hover:bg-neutral-900/30 rounded-xl transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="library_music">library_music</span>
+<span class="font-medium text-sm">Library</span>
+</a>
+<a class="flex items-center gap-3 text-neutral-500 px-4 py-2.5 hover:text-neutral-200 hover:bg-neutral-900/30 rounded-xl transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="graphic_eq">graphic_eq</span>
+<span class="font-medium text-sm">SFX</span>
+</a>
+<a class="flex items-center gap-3 text-neutral-500 px-4 py-2.5 hover:text-neutral-200 hover:bg-neutral-900/30 rounded-xl transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="history">history</span>
+<span class="font-medium text-sm">History</span>
+</a>
+<a class="flex items-center gap-3 text-neutral-500 px-4 py-2.5 hover:text-neutral-200 hover:bg-neutral-900/30 rounded-xl transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite">favorite</span>
+<span class="font-medium text-sm">Likes</span>
+</a>
+</nav>
+</div>
+</div>
+<!-- Account Area at Bottom -->
+<div class="p-4 mt-auto border-t border-neutral-900/40"><div class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-high hover:bg-surface-container-highest transition-colors border border-outline-variant/30 cursor-pointer group">
+<div class="relative">
+<img alt="Das Roy" class="w-10 h-10 rounded-lg object-cover transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWJTY57brn73xd6NeA3mBL5pLjjI6cEgA65P_AvIqiVfzMWhC5Y5HDn8zV69mUKyEjW1nYqpl0-teR4SVCpqyWzzWUiIc2tO7MrViZ8M3o482IhVMPguMLw6FJzf1kND05UT6DgpkqxkepoCl2eu_5yTX9Yv1_PbNkq58_2qSNHrCBNf9xPlkqSpSkdMUzBhqVYw8RwrS7WkICAavcQcDEySlQ-UgfEbDTUXWTsljZxiEqQVEGXFiqCGJDAJQu1CFxYRG04aq5hlir"/>
+<div class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-primary border-2 border-surface-container-lowest rounded-full"></div>
+</div>
+<div class="overflow-hidden flex-1">
+<div class="text-sm font-bold truncate text-on-surface">Das Roy</div>
+<div class="text-[10px] text-primary font-bold uppercase tracking-wider">Pro Plan</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-lg">settings</span>
+</button>
+</div></div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="flex-1 ml-64 overflow-y-auto bg-surface relative flex flex-col">
+<!-- TopNavBar Component -->
+<header class="bg-surface/60 backdrop-blur-2xl border-b border-neutral-900/40 flex justify-between items-center w-full px-8 h-20 top-0 sticky z-40">
+<div class="flex items-center gap-12 flex-1">
+<div class="flex-1 max-w-xl relative group">
+<div class="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-3 pointer-events-none">
+<span class="material-symbols-outlined text-neutral-500 text-[18px] transition-colors group-focus-within:text-primary" data-icon="search">search</span>
+</div>
+<input class="w-full bg-[#121212] border border-neutral-800/50 rounded-xl py-2.5 pl-11 pr-24 text-sm focus:outline-none focus:ring-1 focus:ring-primary/10 focus:border-neutral-700/50 transition-all text-neutral-300 placeholder:text-neutral-600" placeholder="Search music, moods, or artists..." type="text"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
+<span class="text-[10px] font-bold text-neutral-500 bg-neutral-800/40 px-2 py-0.5 rounded-lg border border-neutral-700/30 tracking-widest">⌘K</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6 ml-8">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-neutral-500 hover:text-primary transition-colors font-medium text-xs tracking-wide" href="#">ARTISTS</a>
+<a class="text-neutral-500 hover:text-primary transition-colors font-medium text-xs tracking-wide" href="#">COLLECTIONS</a>
+<a class="text-neutral-500 hover:text-primary transition-colors font-medium text-xs tracking-wide" href="#">RELEASES</a>
+</nav>
+<div class="h-5 w-px bg-neutral-800/60 mx-2"></div>
+<div class="flex items-center gap-3">
+<button class="w-9 h-9 flex items-center justify-center text-neutral-500 hover:text-neutral-200 hover:bg-neutral-900/50 rounded-xl transition-all relative">
+<span class="material-symbols-outlined text-xl" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-1.5 h-1.5 bg-primary rounded-full"></span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center text-neutral-500 hover:text-neutral-200 bg-[#121212] border border-neutral-800/50 hover:bg-neutral-800/50 rounded-xl transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="tune">tune</span>
+</button>
+</div>
+</div>
+</header>
+<div class="p-8 pb-32">
+<!-- Curated Collections Hero -->
+<section class="mb-12">
+<div class="flex items-baseline justify-between mb-6">
+<h2 class="font-headline text-2xl font-extrabold tracking-tighter text-on-surface">Curated Collections</h2>
+<a class="text-neutral-500 font-semibold text-xs hover:text-primary transition-colors" href="#">VIEW ALL</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="group relative h-80 rounded-xl overflow-hidden cursor-pointer bg-surface-container-low border border-white/5 transition-all duration-300 hover:border-primary/20">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80 group-hover:opacity-100" data-alt="Surreal digital art of a lone traveler floating in a galaxy of deep violet and emerald nebula clouds" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwuUqxneDljPPkS3DZSUgOWM8cYVHovn8y1-OaAIKpvkT9jfKynR0sNsskp2_TpmPv1WX1HpTuc33neJrRY-_VfbFsdXNxwVEi4xg9n04Ji3Wf9Z71xqyF3a3RIqRmqqW0d1vRQnWj_GL5g6a3uI8YKU8pSUFJaZExKuOqwBlJjrrZNd77W-YZihADh3NWGLSVS7PWddp4pn988PdA5m-hQzYnlOYHLdhl9b-ZSGhapjauackHVO4RuuhBtFEayCcWzAjLSCW7Afix"/>
+<div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent"></div>
+<div class="absolute bottom-0 p-6 w-full translate-y-2 group-hover:translate-y-0 transition-transform">
+<span class="px-2 py-1 rounded-lg bg-primary/10 text-primary text-[9px] uppercase font-bold tracking-widest mb-3 inline-block">Trending</span>
+<h3 class="font-headline text-2xl font-bold text-white mb-1">Celestial Voyager</h3>
+<p class="text-neutral-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">Immersive ambient landscapes.</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative h-80 rounded-xl overflow-hidden cursor-pointer bg-surface-container-low border border-white/5 transition-all duration-300 hover:border-primary/20">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80 group-hover:opacity-100" data-alt="Futuristic neon city street at night with reflections in puddles and vibrant pink and cyan lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-6P5qruq_EGI-CmVyuHXu-eLwFNqm2xMPWd4qXoV-a7u7rsJlrhzOfRT-8yEs1IHNicHP9DnTSwT1V--UtpwU4QeACFEPICz4BaKvB6QUIlQ6D7EDmqwIcfFtQdURBRj-NVl8NQa9S5ADHr8GAHY-lQ9xkhM8sc5R5pMc4Vh1fjuXrj2IEhC7tk47TJLPO-AVwf6fSTrVukQJjWVzWkVp4lN3Np4ncVMxOtSrB5kThZ1DghIY6KOU4QejeoMJJkIt_Q52ozqq9but"/>
+<div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent"></div>
+<div class="absolute bottom-0 p-6 w-full translate-y-2 group-hover:translate-y-0 transition-transform">
+<span class="px-2 py-1 rounded-lg bg-tertiary/10 text-tertiary text-[9px] uppercase font-bold tracking-widest mb-3 inline-block">Night Life</span>
+<h3 class="font-headline text-2xl font-bold text-white mb-1">Night City Pulse</h3>
+<p class="text-neutral-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">Dark synthwave and industrial.</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative h-80 rounded-xl overflow-hidden cursor-pointer bg-surface-container-low border border-white/5 transition-all duration-300 hover:border-primary/20 lg:flex md:hidden">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80 group-hover:opacity-100" data-alt="Minimalist acoustic guitar leaning against a raw concrete wall with dramatic shadows and morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDifjhcphqUD9MGQb1GvNj6zuiP590fD-U_JjzN933rN2W9hpmI8jm0QogoY1AEN7kkjK-FJ70tGPwXTCzBVEeOL_eGAKZ6lih4WOuSlR-iXICFE3te0WRjHzLZZagGUMaAMNgzuLYt31Ga0MhjodUlYHJatBqi0z_JfVfh7sGOcSHIJ17WlflCFeVXJgXKdZAYy6WyD6vR57-n0-yCQlEOHn16MPODWvsNqWukW2rUx0dwFOScV1pJyztQkv3cXouX0kGVfPMj-x4q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent"></div>
+<div class="absolute bottom-0 p-6 w-full translate-y-2 group-hover:translate-y-0 transition-transform">
+<span class="px-2 py-1 rounded-lg bg-secondary/10 text-secondary text-[9px] uppercase font-bold tracking-widest mb-3 inline-block">Organic</span>
+<h3 class="font-headline text-2xl font-bold text-white mb-1">Raw Resonance</h3>
+<p class="text-neutral-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">Pure acoustic captures.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Discovery Engine -->
+<section>
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="font-headline text-2xl font-extrabold tracking-tighter text-on-surface">Discovery Engine</h2>
+<p class="text-neutral-600 text-xs mt-1 uppercase tracking-wider font-semibold">BASED ON RECENT SESSIONS</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-neutral-900/60 border border-neutral-800/40 px-4 py-1.5 rounded-full text-[10px] font-bold text-neutral-400 hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all">Electronic</button>
+<button class="bg-neutral-900/60 border border-neutral-800/40 px-4 py-1.5 rounded-full text-[10px] font-bold text-neutral-400">Ambient</button>
+<button class="bg-neutral-900/60 border border-neutral-800/40 px-4 py-1.5 rounded-full text-[10px] font-bold text-neutral-400">Cinematic</button>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl overflow-hidden border border-neutral-900/60">
+<!-- Tracks -->
+<div class="divide-y divide-neutral-900/40">
+<!-- Track 1 -->
+<div class="grid grid-cols-12 gap-4 items-center px-6 py-5 hover:bg-neutral-900/60 transition-all cursor-pointer group">
+<div class="col-span-3 flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-neutral-900 flex-shrink-0 overflow-hidden relative border border-white/5 shadow-lg">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Album cover with abstract fluid paint swirling in neon green and obsidian black" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuZGBEsyK3kS-p3UYjj7cx8V-vnbCa9F4oq8ZH8XfRU_rHr-djWWiHsYsMl-2EzYAzGXXK18zU6nBglUXZuLNI6zFhV_pEz3BL1sIcX6KsJsXYTe1xEcrZ6rVttH_z6ykfoSbObj0E7JX6QGStdFYs8FIJk82FdwUHk3Y-zXZPaxzEq6Z0fkPRKRwXcQGBjQ5gt7yViuaydwTfN219TMPFI08FD3YAsSdq2gEREQaA--A42D_JfrRF4LiU3XrdEOAIq8KIdAzKE5VE"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="overflow-hidden">
+<div class="font-bold text-sm text-neutral-100 truncate group-hover:text-primary transition-colors">Ethereal Drift</div>
+<div class="text-[11px] text-neutral-500 truncate">Lunar Architect</div>
+<div class="flex gap-1 mt-1.5">
+<span class="text-[8px] px-1.5 py-0.5 rounded-md bg-neutral-800 text-neutral-400 font-bold uppercase tracking-tighter">Electronic</span>
+<span class="text-[8px] px-1.5 py-0.5 rounded-md bg-neutral-800 text-neutral-400 font-bold uppercase tracking-tighter">Chill</span>
+</div>
+</div>
+</div>
+<!-- Waveform Column -->
+<div class="col-span-3 flex items-center px-2">
+<div class="flex items-center gap-[1.5px] h-8 w-full waveform-glow">
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[30%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[60%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[45%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[85%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[70%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[40%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[90%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[55%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[35%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[80%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[25%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[65%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[95%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[50%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[30%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[75%]"></div>
+</div>
+</div>
+<!-- BPM & Key Column -->
+<div class="col-span-2 flex items-center justify-center gap-8">
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-0.5">BPM</span>
+<span class="text-xs font-mono text-neutral-200">95</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-0.5">Key</span>
+<span class="text-xs font-mono text-neutral-200">Db Maj</span>
+</div>
+</div>
+<!-- Controls -->
+<div class="col-span-4 flex items-center justify-end gap-3">
+<button class="px-5 py-2 text-[10px] font-black uppercase tracking-widest bg-primary text-neutral-950 rounded-lg hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_15px_rgba(119,220,132,0.2)]" title="Adapt to your session profile">Adapt Track</button>
+<div class="flex items-center gap-1 border-l border-neutral-800/60 pl-3">
+<button class="w-10 h-10 flex items-center justify-center text-neutral-500 hover:text-primary transition-colors hover:bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-neutral-500 hover:text-primary transition-colors hover:bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined text-lg" data-icon="favorite">favorite</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-neutral-500 hover:text-neutral-200 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Track 2 -->
+<div class="grid grid-cols-12 gap-4 items-center px-6 py-5 hover:bg-neutral-900/60 transition-all cursor-pointer group">
+<div class="col-span-3 flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-neutral-900 flex-shrink-0 overflow-hidden relative border border-white/5 shadow-lg">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Album art featuring a minimalist high-tech recording microphone in a moodily lit dark studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEfxkxJ_KwPkZMUiP6R51S_hjP8LM6Qqt0oUa_0QyAUsQ6It6K9xPCSM6A6v9oe3drqSfO2qalgNAmOieDFvfVz8in5F5X3brqx6Vz9jcB7nSVTZJZV-0LMkxcmr6sW6s9Y7KfLU3uoAOw3Um2IvhX0DBhynOK5FgVgBiS9zkQ-OqmBxQYeOWr11wOJhtFP3-FUbWdlW97Yloz055iDNPYBKTqufpCaEGCLxMoIOVhR55RReL5Cl00y9OIf-eb_xZK9LgcksPaslPk"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="overflow-hidden">
+<div class="font-bold text-sm text-neutral-100 truncate group-hover:text-primary transition-colors">Subzero Signal</div>
+<div class="text-[11px] text-neutral-500 truncate">Vector Field</div>
+<div class="flex gap-1 mt-1.5">
+<span class="text-[8px] px-1.5 py-0.5 rounded-md bg-neutral-800 text-neutral-400 font-bold uppercase tracking-tighter">Techno</span>
+<span class="text-[8px] px-1.5 py-0.5 rounded-md bg-neutral-800 text-neutral-400 font-bold uppercase tracking-tighter">Industrial</span>
+</div>
+</div>
+</div>
+<div class="col-span-3 flex items-center px-2">
+<div class="flex items-center gap-[1.5px] h-8 w-full waveform-glow">
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[80%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[70%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[90%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[85%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[75%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[95%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[80%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[85%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[90%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[70%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[85%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[95%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[80%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[75%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[90%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[85%]"></div>
+</div>
+</div>
+<div class="col-span-2 flex items-center justify-center gap-8">
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-0.5">BPM</span>
+<span class="text-xs font-mono text-neutral-200">128</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-0.5">Key</span>
+<span class="text-xs font-mono text-neutral-200">Am</span>
+</div>
+</div>
+<div class="col-span-4 flex items-center justify-end gap-3">
+<button class="px-5 py-2 text-[10px] font-black uppercase tracking-widest bg-primary text-neutral-950 rounded-lg hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_15px_rgba(119,220,132,0.2)]" title="Adapt to your session profile">Adapt Track</button>
+<div class="flex items-center gap-1 border-l border-neutral-800/60 pl-3">
+<button class="w-10 h-10 flex items-center justify-center text-neutral-500 hover:text-primary transition-colors hover:bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-neutral-500 hover:text-primary transition-colors hover:bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined text-lg" data-icon="favorite">favorite</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-neutral-500 hover:text-neutral-200 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Track 3 -->
+<div class="grid grid-cols-12 gap-4 items-center px-6 py-5 hover:bg-neutral-900/60 transition-all cursor-pointer group">
+<div class="col-span-3 flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-neutral-900 flex-shrink-0 overflow-hidden relative border border-white/5 shadow-lg">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Album cover with grainy black and white texture of mountain peaks under a heavy dark sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoW9Nb8GgNlpWYmFMzs-KuobV_lJ9dsD8G7sek7Zkg-OJpTCpz0KcmT2svRwGPIPqNYQtbUQqFE9CrUkczs6KuPtM0Z0HyQXbd7yzADYFCC9_jg1BR9c6i3bVfj4l0jAIrNrJzMQ_CdxgvxQTFfsbW_8j0uvkPJ7xtoPRPGdQ73RuuyWAdPyW3T49teL6OMlx5IgP-aHQB6V-Ef_geHmyCY_840Lsy4xBtauhuJPA9zN8_qHlenTmTrL3RzBGd4KA80_n8gJ0Z3YTk"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="overflow-hidden">
+<div class="font-bold text-sm text-neutral-100 truncate group-hover:text-primary transition-colors">Neon Monolith</div>
+<div class="text-[11px] text-neutral-500 truncate">Chrome Pulse</div>
+<div class="flex gap-1 mt-1.5">
+<span class="text-[8px] px-1.5 py-0.5 rounded-md bg-neutral-800 text-neutral-400 font-bold uppercase tracking-tighter">Synthwave</span>
+<span class="text-[8px] px-1.5 py-0.5 rounded-md bg-neutral-800 text-neutral-400 font-bold uppercase tracking-tighter">Retro</span>
+</div>
+</div>
+</div>
+<div class="col-span-3 flex items-center px-2">
+<div class="flex items-center gap-[1.5px] h-8 w-full waveform-glow">
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[20%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[35%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[15%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[25%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[40%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[50%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[30%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[60%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[45%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[70%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[55%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[85%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[65%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[95%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[75%]"></div>
+<div class="waveform-bar flex-1 bg-primary/20 group-hover:bg-primary/60 h-[80%]"></div>
+</div>
+</div>
+<div class="col-span-2 flex items-center justify-center gap-8">
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-0.5">BPM</span>
+<span class="text-xs font-mono text-neutral-200">114</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-0.5">Key</span>
+<span class="text-xs font-mono text-neutral-200">G Maj</span>
+</div>
+</div>
+<div class="col-span-4 flex items-center justify-end gap-3">
+<button class="px-5 py-2 text-[10px] font-black uppercase tracking-widest bg-primary text-neutral-950 rounded-lg hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_15px_rgba(119,220,132,0.2)]" title="Adapt to your session profile">Adapt Track</button>
+<div class="flex items-center gap-1 border-l border-neutral-800/60 pl-3">
+<button class="w-10 h-10 flex items-center justify-center text-neutral-500 hover:text-primary transition-colors hover:bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-neutral-500 hover:text-primary transition-colors hover:bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined text-lg" data-icon="favorite">favorite</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-neutral-500 hover:text-neutral-200 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Persistent Player Bottom Bar -->
+<footer class="fixed bottom-0 left-0 right-0 h-24 bg-surface-container-high/60 backdrop-blur-3xl z-[60] border-t border-neutral-900/40 px-8 flex items-center justify-between">
+<!-- Now Playing -->
+<div class="flex items-center gap-4 w-1/4">
+<div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 shadow-2xl border border-white/5">
+<img class="w-full h-full object-cover" data-alt="Small thumbnail of celestial nebula album art for current playback" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoeZWbKeOWUVKAEUwdLffbRLTANszHm0qL8htOfkL5lGNSk3oIbtSKMCZo36MH_DSaf61o-aP03HZRiW7kokBMGKMUoHssh2hix_mRkOpPcKyyysgVGrMDg3Rk2FQs_qr3AI98JekPUiMBG6Oz1Qx3KKoUeslUYp3FW5yLvWWpssLV4jMLVCjbuzoiXd7cCHqFXlZMcrJs2UeuVcOmS24RiRZ72EWb-If7P4c-fx_H5c8w2sThZNUHZHOL1R-TsWa6I0FyH6BEZzju"/>
+</div>
+<div class="overflow-hidden">
+<h4 class="text-sm font-bold text-white truncate">Ethereal Drift</h4>
+<p class="text-xs text-neutral-500 truncate">Lunar Architect</p>
+</div>
+<button class="ml-2 text-primary animate-pulse">
+<span class="material-symbols-outlined text-lg" data-icon="equalizer">equalizer</span>
+</button>
+</div>
+<!-- Controls -->
+<div class="flex flex-col items-center gap-2 flex-1 max-w-2xl">
+<div class="flex items-center gap-8">
+<button class="text-neutral-600 hover:text-neutral-200 transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="shuffle">shuffle</span>
+</button>
+<button class="text-neutral-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="skip_previous" style="font-variation-settings: 'FILL' 1;">skip_previous</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-primary text-neutral-950 flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-[0_0_25px_rgba(119,220,132,0.4)]">
+<span class="material-symbols-outlined text-3xl" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="text-neutral-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="skip_next" style="font-variation-settings: 'FILL' 1;">skip_next</span>
+</button>
+<button class="text-neutral-600 hover:text-neutral-200 transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="repeat">repeat</span>
+</button>
+</div>
+<div class="w-full flex items-center gap-3">
+<span class="text-[9px] font-mono text-neutral-600 w-10 text-right">01:42</span>
+<div class="flex-1 h-1 bg-neutral-800 rounded-full relative overflow-hidden group cursor-pointer">
+<div class="absolute left-0 top-0 h-full w-1/3 bg-primary rounded-full relative shadow-[0_0_10px_rgba(119,220,132,0.6)]"></div>
+</div>
+<span class="text-[9px] font-mono text-neutral-600 w-10">04:32</span>
+</div>
+</div>
+<!-- System Controls -->
+<div class="flex items-center justify-end gap-6 w-1/4">
+<button class="text-neutral-600 hover:text-neutral-200">
+<span class="material-symbols-outlined text-lg" data-icon="queue_music">queue_music</span>
+</button>
+<div class="flex items-center gap-2 group">
+<span class="material-symbols-outlined text-lg text-neutral-600" data-icon="volume_up">volume_up</span>
+<div class="w-20 h-1 bg-neutral-800 rounded-full overflow-hidden">
+<div class="w-3/4 h-full bg-neutral-600 group-hover:bg-primary transition-colors"></div>
+</div>
+</div>
+<button class="text-neutral-600 hover:text-neutral-200">
+<span class="material-symbols-outlined text-lg" data-icon="fullscreen">fullscreen</span>
+</button>
+</div>
+</footer>
+</body></html>
