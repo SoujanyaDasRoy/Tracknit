@@ -79,7 +79,10 @@ export async function apiFetch(endpoint: string, options: FetchOptions = {}) {
   }
 
   // 3. Build absolute/proxied URL
-  const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+  let cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+  if (cleanEndpoint.startsWith("/api/backend/")) {
+    cleanEndpoint = cleanEndpoint.replace("/api/backend", "");
+  }
   let targetUrl = `${API_BASE_URL}${cleanEndpoint}`;
   
   if (isServer) {
