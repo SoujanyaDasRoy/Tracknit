@@ -99,13 +99,6 @@ export async function apiFetch(endpoint: string, options: FetchOptions = {}) {
     headers,
   };
 
-  console.log("=================================");
-  console.log("API FETCH DEBUG");
-  console.log("TARGET URL:", targetUrl);
-  console.log("AUTH HEADER:", authHeader);
-  console.log("HEADERS:", Object.fromEntries(headers.entries()));
-  console.log("=================================");
-  
   const response = await fetch(targetUrl, fetchOptions);
 
   if (!response.ok) {

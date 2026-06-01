@@ -3,6 +3,40 @@ import GoogleProvider from "next-auth/providers/google";
 import AppleProvider from "next-auth/providers/apple";
 import DiscordProvider from "next-auth/providers/discord";
 
+async function refreshAccessToken(token: any) {
+  try {
+    const wpBase = process.env.NEXT_PUBLIC_WP_URL || "https://api.tracknit.com";
+    const response = await fetch(`${wpBase}/wp-json/tracknit/v1/auth/refresh`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        refresh_token: token.refreshToken,
+      }),
+    });
+
+    const refreshedTokens = await response.json();
+
+    if (!response.ok) {
+      throw refreshedTokens;
+    }
+
+    return {
+      ...token,
+      accessToken: refreshedTokens.access_token,
+      refreshToken: refreshedTokens.refresh_token ?? token.refreshToken,
+      accessTokenExpires: Date.now() + 3540 * 1000, // 59 minutes
+    };
+  } catch (error) {
+    console.error("[Tracknit] Error refreshing access token", error);
+    return {
+      ...token,
+      error: "RefreshAccessTokenError",
+    };
+  }
+}
+
 export const authOptions: NextAuthOptions = {
   providers: [
     // ── Google ──────────────────────────────────────────────────────────
@@ -59,7 +93,10 @@ export const authOptions: NextAuthOptions = {
         // Exchange social token with our WP backend to provision/fetch the WP user.
         const response = await fetch(`${wpBase}/wp-json/tracknit/v1/auth/social-login`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json",
+            "x-tracknit-shared-secret": process.env.TRACKNIT_SHARED_SECRET || "",
+          },
           body: JSON.stringify({
             provider:     account.provider,                         // "google" | "apple" | "discord"
             provider_id:  account.providerAccountId,                // Unique ID from the provider
@@ -78,6 +115,8 @@ export const authOptions: NextAuthOptions = {
           // so the jwt() callback can persist it in the encrypted token.
           (user as any).wpId         = data.user?.id?.toString();
           (user as any).accessToken  = data.access_token;
+          (user as any).refreshToken = data.refresh_token;
+          (user as any).accessTokenExpires = Date.now() + 3540 * 1000;
           (user as any).planTier     = data.user?.plan_tier     || "free";
           (user as any).masterUserId = data.user?.master_user_id || data.user?.id;
           (user as any).teamId       = data.user?.team_id       || null;
@@ -103,6 +142,8 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id           = (user as any).wpId          || user.id;
         token.accessToken  = (user as any).accessToken;
+        token.refreshToken = (user as any).refreshToken;
+        token.accessTokenExpires = (user as any).accessTokenExpires;
         token.planTier     = (user as any).planTier;
         token.masterUserId = (user as any).masterUserId;
         token.teamId       = (user as any).teamId;
@@ -112,6 +153,16 @@ export const authOptions: NextAuthOptions = {
       // Carry the raw provider id_token for edge calls if needed
       if (account?.id_token)    token.idToken      = account.id_token;
       if (account?.provider)    token.provider     = account.provider;
+
+      // If it's a subsequent call and token is not expired, return token
+      if (Date.now() < (token.accessTokenExpires as number)) {
+        return token;
+      }
+
+      // Access token has expired, refresh it
+      if (token.refreshToken) {
+        return await refreshAccessToken(token);
+      }
 
       return token;
     },
@@ -132,6 +183,8 @@ export const authOptions: NextAuthOptions = {
         session.user.role        = token.role;
         // @ts-ignore
         session.provider         = token.provider;
+        // @ts-ignore
+        session.error            = token.error;
       }
       return session;
     },
