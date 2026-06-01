@@ -43,46 +43,59 @@ export const authOptions: NextAuthOptions = {
      * Called after the provider verifies the user.
      * We synchronize the social identity to WordPress here,
      * creating a native WP user if they don't exist yet.
+     *
+     * IMPORTANT: This callback always returns `true` so that the social
+     * sign-in never fails silently from the user's perspective. If the
+     * WordPress sync fails, the user still gets a NextAuth session — they
+     * just won't have an `accessToken` for protected API calls until the
+     * backend sync succeeds (which happens automatically on next sign-in).
      */
     async signIn({ user, account, profile }) {
       if (!account || !user.email) return false;
 
       try {
-        const wpBase = process.env.NEXT_PUBLIC_WP_URL || "https://your-backend-domain.com";
+        const wpBase = process.env.NEXT_PUBLIC_WP_URL || "https://api.tracknit.com";
 
         // Exchange social token with our WP backend to provision/fetch the WP user.
         const response = await fetch(`${wpBase}/wp-json/tracknit/v1/auth/social-login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            provider:    account.provider,                          // "google" | "apple" | "discord"
-            provider_id: account.providerAccountId,                 // Unique ID from the provider
-            id_token:    account.id_token    || null,               // Google / Apple id_token
+            provider:     account.provider,                         // "google" | "apple" | "discord"
+            provider_id:  account.providerAccountId,                // Unique ID from the provider
+            id_token:     account.id_token    || null,              // Google / Apple id_token
             access_token: account.access_token || null,            // Discord access_token
-            email:       user.email,
-            name:        user.name  || profile?.name || "",
-            avatar:      user.image || "",
+            email:        user.email,
+            name:         user.name  || (profile as any)?.name || "",
+            avatar:       user.image || "",
           }),
+          signal: AbortSignal.timeout(8000), // Don't hang login for more than 8s
         });
 
-        if (!response.ok) return false;
-
-        const data = await response.json();
-
-        // Attach WP user data directly onto the next-auth user object
-        // so the jwt() callback can pick it up.
-        (user as any).wpId          = data.user?.id?.toString();
-        (user as any).accessToken   = data.access_token;
-        (user as any).planTier      = data.user?.plan_tier      || "free";
-        (user as any).masterUserId  = data.user?.master_user_id || data.user?.id;
-        (user as any).teamId        = data.user?.team_id        || null;
-        (user as any).role          = data.user?.role           || "subscriber";
-
-        return true;
+        if (response.ok) {
+          const data = await response.json();
+          // Attach WP user data onto the next-auth user object
+          // so the jwt() callback can persist it in the encrypted token.
+          (user as any).wpId         = data.user?.id?.toString();
+          (user as any).accessToken  = data.access_token;
+          (user as any).planTier     = data.user?.plan_tier     || "free";
+          (user as any).masterUserId = data.user?.master_user_id || data.user?.id;
+          (user as any).teamId       = data.user?.team_id       || null;
+          (user as any).role         = data.user?.role          || "subscriber";
+        } else {
+          // Backend returned a non-OK response — log it but don't block login.
+          const errorText = await response.text().catch(() => "unknown");
+          console.warn(
+            `[Tracknit] social-login sync returned ${response.status}: ${errorText.substring(0, 200)}`
+          );
+        }
       } catch (err) {
-        console.error("[Tracknit] social-login sync failed:", err);
-        return false;
+        // Network failure / timeout — log it but don't block login.
+        console.error("[Tracknit] social-login sync failed (network/timeout):", err);
       }
+
+      // Always allow the social login to complete.
+      return true;
     },
 
     async jwt({ token, user, account }) {

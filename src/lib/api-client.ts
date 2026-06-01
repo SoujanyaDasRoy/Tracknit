@@ -83,13 +83,9 @@ export async function apiFetch(endpoint: string, options: FetchOptions = {}) {
   if (cleanEndpoint.startsWith("/api/backend/")) {
     cleanEndpoint = cleanEndpoint.replace("/api/backend", "");
   }
-  let targetUrl = `${API_BASE_URL}${cleanEndpoint}`;
   
-  if (isServer) {
-    // Server Components fetch directly from the absolute WordPress API domain
-    const wpBase = process.env.NEXT_PUBLIC_WP_URL || "https://api.tracknit.com";
-    targetUrl = `${wpBase}/wp-json/tracknit/v1${cleanEndpoint}`;
-  }
+  const wpBase = process.env.NEXT_PUBLIC_WP_URL || "https://api.tracknit.com";
+  const targetUrl = `${wpBase}/wp-json/tracknit/v1${cleanEndpoint}`;
 
   // 4. Smart caching configurations
   // Non-GET requests (mutations) bypass cache completely. GET requests revalidate every 60s.
