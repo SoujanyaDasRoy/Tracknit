@@ -228,11 +228,21 @@ function renderCompareValue(value: CompareValue, highlighted: boolean) {
 }
 
 export default function PricingPage() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
   const [region, setRegion] = useState<RegionCode>("US");
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+
+  useEffect(() => {
+  console.log("=================================");
+  console.log("NEXTAUTH DEBUG");
+  console.log("STATUS:", status);
+  console.log("SESSION:", session);
+  console.log("ACCESS TOKEN:", (session as any)?.accessToken);
+  console.log("USER:", session?.user);
+  console.log("=================================");
+}, [session, status]);
 
   useEffect(() => {
     let active = true;

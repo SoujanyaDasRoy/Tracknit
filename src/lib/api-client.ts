@@ -7,7 +7,7 @@ export const getCachedServerSession = cache(async () => {
   return await getServerSession(authOptions);
 });
 
-const API_BASE_URL = "/api/backend";
+const API_BASE_URL = "https://api.tracknit.com/wp-json/tracknit/v1";
 
 interface FetchOptions extends RequestInit {
   token?: string;
@@ -99,6 +99,13 @@ export async function apiFetch(endpoint: string, options: FetchOptions = {}) {
     headers,
   };
 
+  console.log("=================================");
+  console.log("API FETCH DEBUG");
+  console.log("TARGET URL:", targetUrl);
+  console.log("AUTH HEADER:", authHeader);
+  console.log("HEADERS:", Object.fromEntries(headers.entries()));
+  console.log("=================================");
+  
   const response = await fetch(targetUrl, fetchOptions);
 
   if (!response.ok) {
