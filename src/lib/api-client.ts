@@ -2,16 +2,23 @@ import { getSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./auth";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "/api/backend";
+const API_BASE_URL = "/api/backend";
 
 interface FetchOptions extends RequestInit {
   token?: string;
   skipAuth?: boolean;
 }
 
+// Client-side in-memory token cache to prevent redundant session network calls
+let cachedToken: string | null = null;
+let tokenExpiry = 0;
+
 /**
  * Standardized API client for Tracknit frontend.
- * Automatically injects the correct JWT Bearer token and targets the Cloudflare Edge Proxy.
+ * - Automatically injects the correct JWT Bearer token.
+ * - Uses client-side token memoization to avoid redundant session fetches.
+ * - Routes browser queries through a same-origin proxy (/api/backend) to eliminate CORS errors.
+ * - Server components query the backend directly using microsecond-revalidated fetch layers.
  */
 export async function apiFetch(endpoint: string, options: FetchOptions = {}) {
   const { skipAuth = false, token, ...init } = options;
@@ -35,12 +42,24 @@ export async function apiFetch(endpoint: string, options: FetchOptions = {}) {
         console.error("Failed to retrieve server-side session:", err);
       }
     } else {
-      // Client-side (Browser)
-      const session = await getSession();
-      // @ts-ignore
-      if (session?.accessToken) {
-        // @ts-ignore
-        authHeader = `Bearer ${session.accessToken}`;
+      // Client-side (Browser) with in-memory memoization
+      const now = Math.floor(Date.now() / 1000);
+      if (cachedToken && tokenExpiry > now) {
+        authHeader = `Bearer ${cachedToken}`;
+      } else {
+        try {
+          const session = await getSession();
+          // @ts-ignore
+          if (session?.accessToken) {
+            // @ts-ignore
+            cachedToken = session.accessToken as string;
+            const parsed = parseJwt(cachedToken);
+            tokenExpiry = parsed?.exp ? parsed.exp - 30 : now + 60; // safe 30s buffer before expiry
+            authHeader = `Bearer ${cachedToken}`;
+          }
+        } catch (err) {
+          console.error("Failed to retrieve client-side session:", err);
+        }
       }
     }
   }
@@ -54,23 +73,29 @@ export async function apiFetch(endpoint: string, options: FetchOptions = {}) {
     headers.set("Content-Type", "application/json");
   }
 
-  // 3. Build absolute URL
-  // If endpoint starts with http/https, use it directly. Otherwise, prefix with base API URL.
+  // 3. Build absolute/proxied URL
   const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
-  
-  // Note: On the server, we need absolute URLs. 
-  // Cloudflare Page edge rewrites works beautifully for browser calls, but for server-to-server calls, 
-  // we must hit the actual WordPress backend directly if no local host url exists.
   let targetUrl = `${API_BASE_URL}${cleanEndpoint}`;
+  
   if (isServer) {
-    const wpBase = process.env.NEXT_PUBLIC_WP_URL || "https://your-backend-domain.com";
+    // Server Components fetch directly from the absolute WordPress API domain
+    const wpBase = process.env.NEXT_PUBLIC_WP_URL || "https://api.tracknit.com";
     targetUrl = `${wpBase}/wp-json/tracknit/v1${cleanEndpoint}`;
   }
 
-  const response = await fetch(targetUrl, {
+  // 4. Smart caching configurations
+  // Non-GET requests (mutations) bypass cache completely. GET requests revalidate every 60s.
+  const defaultCacheOptions = init.method && init.method !== "GET"
+    ? { cache: "no-store" as RequestCache }
+    : { next: { revalidate: 60 } };
+
+  const fetchOptions = {
+    ...defaultCacheOptions,
     ...init,
     headers,
-  });
+  };
+
+  const response = await fetch(targetUrl, fetchOptions);
 
   if (!response.ok) {
     let errorMessage = "An error occurred during the API call";
