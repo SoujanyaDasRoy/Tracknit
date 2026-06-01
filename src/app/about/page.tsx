@@ -13,146 +13,108 @@ export const metadata = {
     "Tracknit exists for moments where visuals speak—but sound decides how they're felt. Learn about our story, our founder, and why creators choose us.",
 };
 
-const WHY_ITEMS = [
-  {
-    icon: Clapperboard,
-    title: "Story-aware sound",
-    description:
-      "Every track is designed to sit naturally inside a story—blending seamlessly with visuals, never competing with them.",
-  },
-  {
-    icon: Mic2,
-    title: "Producer-crafted audio",
-    description:
-      "Made by producers who understand real editing workflows. Not generated. Not filler. Purpose-built for post.",
-  },
-  {
-    icon: Heart,
-    title: "Emotion-driven tracks",
-    description:
-      "Music organised by feel, pacing, and narrative—not just genre tags. Find the right sound faster, every time.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Creator-friendly access",
-    description:
-      "Clear, uncomplicated licensing. Use it on YouTube, podcasts, ads, and client work without chasing claims.",
-  },
-];
-
 export default function AboutPage() {
   return (
-    <div className="font-body text-white overflow-x-hidden">
-
+    <div className="font-sans antialiased text-[#0C0C0E] bg-[#F5F4EE] overflow-x-hidden min-h-screen">
+      
       {/* ═══════════════════════════════════════════════
-          SECTION 1 — HERO  (Dark #050505)
+          SECTION 1 — HERO (Elegant Grey-Blue `#BDBBC8`)
       ═══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-[#050505] px-6 pb-28 pt-40 text-center">
-        {/* Ambient glow */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#7CFF00]/4 blur-[160px]" />
-        <div className="pointer-events-none absolute left-1/4 top-1/3 h-[300px] w-[400px] rounded-full bg-white/[0.015] blur-[120px]" />
+      <section className="bg-[#BDBBC8] border-b border-[#0C0C0E]/5">
+        <div className="mx-auto max-w-[1280px] px-6 py-20 lg:py-32">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-20 items-center">
+            
+            {/* Left Column: Text */}
+            <div className="lg:col-span-7 flex flex-col justify-center">
+              <span className="text-[11px] font-bold tracking-[0.25em] text-[#0C0C0E]/60 uppercase mb-4 block">
+                Our Story
+              </span>
+              <h1 className="text-[clamp(32px,4.5vw,60px)] font-bold tracking-tight text-[#0C0C0E] leading-[1.05] max-w-2xl">
+                Tracknit exists for moments where{" "}
+                <span className="text-[#0C0C0E]/60">visuals speak</span>—but{" "}
+                <span className="underline decoration-1 underline-offset-4">sound decides</span> how they&apos;re felt.
+              </h1>
+              <p className="mt-6 max-w-xl text-[15px] lg:text-[16px] text-[#0C0C0E]/75 leading-relaxed font-normal">
+                A platform built not on quantity, but on intent—where every sound knows when to speak, and when to stay out of the way.
+              </p>
+              <div className="mt-8">
+                <Link
+                  href="/library/royalty-free-music"
+                  className="inline-flex items-center justify-center bg-[#0C0C0E] text-white px-8 py-3.5 text-xs font-bold tracking-wider uppercase rounded-sm hover:bg-[#2A2A2E] transition-all"
+                >
+                  Browse Music
+                </Link>
+              </div>
+            </div>
 
-        <div className="relative z-10 mx-auto max-w-5xl">
-          <span className="mb-6 inline-block text-[10px] font-black uppercase tracking-[0.4em] text-white/30">
-            Our Story
-          </span>
+            {/* Right Column: Image */}
+            <div className="lg:col-span-5">
+              <div className="overflow-hidden rounded-sm shadow-xl aspect-[4/3] lg:aspect-[5/6] bg-[#A9A7B3]">
+                <img
+                  src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=900&q=80"
+                  alt="Tracknit conducting sound"
+                  className="w-full h-full object-cover filter contrast-[1.02]"
+                />
+              </div>
+            </div>
 
-          <h1 className="text-[clamp(38px,5.5vw,76px)] font-black leading-[0.92] tracking-[-0.04em] text-white">
-            Tracknit exists for moments
-            <br />
-            where{" "}
-            <span className="italic text-white/40">visuals speak</span>
-            <span className="text-white">—</span>
-            <br />
-            but{" "}
-            <span className="text-[#7CFF00]">sound decides</span>
-            <br className="hidden sm:block" />
-            {" "}how they&apos;re felt.
-          </h1>
-
-          <p className="mx-auto mt-10 max-w-2xl text-[17px] font-medium leading-relaxed text-white/45">
-            A platform built not on quantity, but on intent—
-            where every sound knows when to speak, and when to stay out of the way.
-          </p>
+          </div>
         </div>
-
-        {/* Bottom fade into next section */}
-        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#111111]" />
       </section>
 
       {/* ═══════════════════════════════════════════════
-          SECTION 2 — FOUNDER STORY  (Dark #111111)
+          SECTION 2 — FOUNDER STORY (Warm Off-white `#F5F4EE`)
       ═══════════════════════════════════════════════ */}
-      <section className="bg-[#111111] px-6 py-24 lg:py-32">
-        <div className="mx-auto max-w-[1280px]">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20 lg:items-center">
-
-            {/* Left: Portrait */}
-            <div className="relative">
-              <div className="group relative aspect-[4/5] overflow-hidden rounded-[2.5rem] shadow-2xl">
-                <img
-                  src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=900&q=80"
-                  alt="Tarun Rao — Founder of Tracknit"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
-
-                {/* Caption overlay */}
-                <div className="absolute bottom-8 left-8 right-8">
-                  <p className="mb-1 text-[10px] font-black uppercase tracking-[0.36em] text-white/40">
-                    Founder
-                  </p>
-                  <h3 className="text-2xl font-black leading-none tracking-tight text-white">
-                    Tarun Rao
-                  </h3>
-                  <p className="mt-1.5 text-[13px] font-medium text-white/55">
-                    Music Producer &amp; Sound Designer · Pune
-                  </p>
-                </div>
-              </div>
-
-              {/* Decorative accent */}
-              <div className="pointer-events-none absolute -bottom-6 -right-6 h-48 w-48 rounded-full bg-[#7CFF00]/6 blur-[80px]" />
-            </div>
-
-            {/* Right: Story Text */}
-            <div className="flex flex-col justify-center">
-              <span className="mb-5 block text-[10px] font-black uppercase tracking-[0.4em] text-white/25">
+      <section className="bg-[#F5F4EE]">
+        <div className="mx-auto max-w-[1280px] px-6 py-20 lg:py-28">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-20 items-start">
+            
+            {/* Left Column: Text */}
+            <div className="lg:col-span-7 flex flex-col justify-center">
+              <span className="text-[11px] font-bold tracking-[0.25em] text-[#0C0C0E]/50 uppercase mb-4 block">
                 The Origin
               </span>
-
-              <h2 className="mb-8 text-[clamp(32px,3.5vw,50px)] font-black leading-[1.0] tracking-[-0.04em] text-white">
-                Built from the gap
-                <br />
-                every creator feels.
+              <h2 className="text-[clamp(28px,3.5vw,44px)] font-bold tracking-tight text-[#0C0C0E] leading-tight mb-8">
+                Built from the gap every creator feels.
               </h2>
-
-              <div className="space-y-5 text-[16px] font-medium leading-relaxed text-white/55">
+              <div className="space-y-6 text-[15px] text-[#0C0C0E]/70 leading-relaxed font-normal max-w-xl">
                 <p>
-                  Tarun Rao is a multi-genre music producer and sound design enthusiast
-                  based in Pune. After years of producing music and working closely with
-                  artists and creators, he repeatedly faced the same challenge: most available
-                  music didn&apos;t fit the story.
+                  Tarun Rao is a multi-genre music producer and sound design enthusiast based in Pune. After years of producing music and working closely with artists and creators, he repeatedly faced the same challenge: most available music didn&apos;t fit the story.
                 </p>
                 <p>
-                  It filled space, but rarely filled <em className="text-white/80 not-italic">meaning</em>.
+                  It filled space, but rarely filled <span className="italic text-[#0C0C0E] font-semibold">meaning</span>.
                 </p>
                 <p>
-                  So he began building his own sounds—designed around emotion, pacing, and
-                  narrative instead of categories or trends. That process evolved into Tracknit.
+                  So he began building his own sounds—designed around emotion, pacing, and narrative instead of categories or trends. That process evolved into Tracknit.
                 </p>
               </div>
 
               {/* Pull quote */}
-              <blockquote className="mt-10 border-l-2 border-[#7CFF00]/50 pl-6">
-                <p className="text-[18px] font-semibold italic leading-snug text-white/80">
-                  &ldquo;The focus is always on feel first, polish second,
-                  and flexibility throughout.&rdquo;
+              <div className="mt-10 border-l-2 border-[#0C0C0E]/20 pl-6 py-2 max-w-xl">
+                <p className="text-lg italic text-[#0C0C0E]/85 leading-snug font-medium">
+                  &ldquo;The focus is always on feel first, polish second, and flexibility throughout.&rdquo;
                 </p>
-                <cite className="mt-3 block text-[11px] font-black uppercase not-italic tracking-[0.3em] text-white/30">
+                <p className="mt-2 text-[10px] font-bold tracking-widest text-[#0C0C0E]/40 uppercase">
                   — Tarun Rao, Founder
-                </cite>
-              </blockquote>
+                </p>
+              </div>
+            </div>
+
+            {/* Right Column: Grayscale Styled Portrait */}
+            <div className="lg:col-span-5">
+              <div className="bg-[#EAE8DE] p-4 rounded-sm shadow-md border border-[#0C0C0E]/5">
+                <div className="overflow-hidden rounded-sm bg-[#D5D3C8]">
+                  <img
+                    src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=900&q=80"
+                    alt="Tarun Rao — Founder of Tracknit"
+                    className="w-full aspect-[4/5] object-cover filter grayscale contrast-[1.05]"
+                  />
+                </div>
+                <div className="mt-4 flex items-center justify-between text-[11px] text-[#0C0C0E]/60 uppercase tracking-widest font-bold">
+                  <span>Tarun Rao</span>
+                  <span>Pune, IN</span>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -160,47 +122,42 @@ export default function AboutPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════
-          SECTION 3 — MORE THAN A LIBRARY  (Light #E5E5E5)
+          SECTION 3 — MORE THAN A LIBRARY (Contrast Flip to Deep Charcoal `#0C0C0E`)
       ═══════════════════════════════════════════════ */}
-      <section className="bg-[#E5E5E5] px-6 py-24 lg:py-32 text-black">
-        <div className="mx-auto max-w-[1280px]">
-
-          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-24 lg:items-center">
-
-            {/* Left: Editorial Text */}
-            <div>
-              <span className="mb-5 block text-[10px] font-black uppercase tracking-[0.4em] text-black/30">
-                Our Philosophy
-              </span>
-              <h2 className="text-[clamp(36px,4vw,60px)] font-black leading-[0.95] tracking-[-0.04em] text-black">
-                More than
-                <br />
-                a music library.
-              </h2>
-
-              <p className="mt-8 max-w-md text-[16px] font-medium leading-relaxed text-black/55">
-                Tracknit isn&apos;t built on quantity. It&apos;s built on intent. Every track,
-                texture, and soundscape is created to sit naturally inside a story—whether
-                that story unfolds in a film, a reel, a podcast, an ad, or a late-night edit.
-              </p>
+      <section className="bg-[#0C0C0E] text-white">
+        <div className="mx-auto max-w-[1280px] px-6 py-20 lg:py-32">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-24 items-center">
+            
+            {/* Left Column: Bold Pink Art Collage */}
+            <div className="lg:col-span-5">
+              <div className="overflow-hidden rounded-sm shadow-2xl bg-[#EAEAEA] aspect-square">
+                <img
+                  src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=900&q=80"
+                  alt="Expressive and original sound art"
+                  className="w-full h-full object-cover filter contrast-[1.02]"
+                />
+              </div>
             </div>
 
-            {/* Right: Bold statement card */}
-            <div className="relative">
-              <div className="overflow-hidden rounded-[2rem] bg-black px-10 py-12 shadow-2xl">
-                <div className="pointer-events-none absolute right-0 top-0 h-64 w-64 rounded-full bg-[#7CFF00]/8 blur-[80px]" />
-                <p className="relative z-10 text-[10px] font-black uppercase tracking-[0.4em] text-white/25 mb-6">
-                  The Standard
-                </p>
-                <p className="relative z-10 text-[clamp(22px,3vw,34px)] font-black leading-[1.15] tracking-[-0.03em] text-white">
-                  No filler tracks.
-                  <br />
-                  No overproduced noise.
-                </p>
-                <div className="my-8 h-px w-full bg-white/10" />
-                <p className="relative z-10 text-[16px] font-medium leading-relaxed text-white/50">
-                  Just sound that knows when to speak—
-                  <span className="text-white/80"> and when to stay out of the way.</span>
+            {/* Right Column: Text and Manifesto Card */}
+            <div className="lg:col-span-7">
+              <span className="text-[11px] font-bold tracking-[0.25em] text-[#7CFF00] uppercase mb-4 block">
+                Our Philosophy
+              </span>
+              <h2 className="text-[clamp(28px,3.5vw,44px)] font-bold tracking-tight text-white leading-tight mb-6">
+                More than a music library.
+              </h2>
+              <p className="text-[15px] text-white/70 leading-relaxed max-w-xl font-normal">
+                Tracknit isn&apos;t built on quantity. It&apos;s built on intent. Every track, texture, and soundscape is created to sit naturally inside a story—whether that story unfolds in a film, a reel, a podcast, an ad, or a late-night edit.
+              </p>
+
+              {/* Manifesto Card */}
+              <div className="bg-white/[0.03] border border-white/10 p-6 rounded-sm max-w-xl mt-8">
+                <h4 className="text-sm font-bold text-[#7CFF00] tracking-wider uppercase mb-2">
+                  No filler tracks. No overproduced noise.
+                </h4>
+                <p className="text-sm text-white/60 leading-relaxed font-normal">
+                  Just sound that knows when to speak—<span className="text-white/90">and when to stay out of the way.</span>
                 </p>
               </div>
             </div>
@@ -210,106 +167,307 @@ export default function AboutPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════
-          SECTION 4 — WHY CREATORS CHOOSE  (Dark #0b0d11)
+          SECTION 4 — STORY & PRODUCER FOCUS (Warm Off-white `#F5F4EE`)
       ═══════════════════════════════════════════════ */}
-      <section className="bg-[#0b0d11] px-6 py-24 lg:py-32">
-        <div className="mx-auto max-w-[1280px]">
-
-          <div className="mb-14 text-center">
-            <span className="mb-4 block text-[10px] font-black uppercase tracking-[0.4em] text-white/25">
-              What Sets Us Apart
-            </span>
-            <h2 className="text-[clamp(32px,4vw,56px)] font-black leading-[0.98] tracking-[-0.04em] text-white">
-              Why creators choose
-              <br />
-              <span className="text-[#7CFF00]">Tracknit</span>
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {WHY_ITEMS.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.title}
-                  className="group relative flex flex-col rounded-[1.75rem] border border-white/[0.07] bg-white/[0.02] p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#7CFF00]/25 hover:bg-white/[0.035] hover:shadow-[0_24px_60px_-20px_rgba(124,255,0,0.1)]"
-                >
-                  {/* Icon */}
-                  <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/[0.06] bg-white/[0.04] text-[#7CFF00] transition-colors group-hover:border-[#7CFF00]/20 group-hover:bg-[#7CFF00]/10">
-                    <Icon className="h-5 w-5" strokeWidth={1.75} />
+      <section className="bg-[#F5F4EE] border-b border-[#0C0C0E]/5">
+        <div className="mx-auto max-w-[1280px] px-6 py-16 lg:py-24">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-20 items-center">
+            
+            {/* Left Column: Why Us Info */}
+            <div className="lg:col-span-7">
+              <span className="text-[11px] font-bold tracking-[0.25em] text-[#0C0C0E]/50 uppercase mb-4 block">
+                What Sets Us Apart
+              </span>
+              <h2 className="text-[clamp(24px,3vw,38px)] font-bold tracking-tight text-[#0C0C0E] leading-tight mb-10">
+                Story-aware sound &amp; producer-crafted audio.
+              </h2>
+              
+              <div className="space-y-10 max-w-xl">
+                
+                {/* Item 1 */}
+                <div className="group">
+                  <div className="flex items-center gap-3 text-[16px] font-bold text-[#0C0C0E]">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-sm bg-[#0C0C0E]/5 text-[#0C0C0E] border border-[#0C0C0E]/10 transition-colors group-hover:bg-[#7CFF00]/10 group-hover:border-[#7CFF00]/25 group-hover:text-black">
+                      <Clapperboard className="h-4.5 w-4.5" strokeWidth={1.5} />
+                    </div>
+                    <h3>Story-aware sound</h3>
                   </div>
-
-                  <h3 className="mb-3 text-[17px] font-bold leading-snug tracking-tight text-white">
-                    {item.title}
-                  </h3>
-                  <p className="text-[13.5px] font-medium leading-relaxed text-white/45 group-hover:text-white/58 transition-colors">
-                    {item.description}
+                  <p className="text-[14px] text-[#0C0C0E]/60 leading-relaxed mt-2.5 pl-12 font-normal">
+                    Every track is designed to sit naturally inside a story—blending seamlessly with visuals, never competing with them.
                   </p>
-
-                  {/* Hover glow */}
-                  <div className="pointer-events-none absolute bottom-0 left-1/2 h-24 w-32 -translate-x-1/2 rounded-full bg-[#7CFF00]/0 blur-[40px] transition-all duration-500 group-hover:bg-[#7CFF00]/8" />
                 </div>
-              );
-            })}
-          </div>
 
+                {/* Item 2 */}
+                <div className="group">
+                  <div className="flex items-center gap-3 text-[16px] font-bold text-[#0C0C0E]">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-sm bg-[#0C0C0E]/5 text-[#0C0C0E] border border-[#0C0C0E]/10 transition-colors group-hover:bg-[#7CFF00]/10 group-hover:border-[#7CFF00]/25 group-hover:text-black">
+                      <Mic2 className="h-4.5 w-4.5" strokeWidth={1.5} />
+                    </div>
+                    <h3>Producer-crafted audio</h3>
+                  </div>
+                  <p className="text-[14px] text-[#0C0C0E]/60 leading-relaxed mt-2.5 pl-12 font-normal">
+                    Made by producers who understand real editing workflows. Not generated. Not filler. Purpose-built for post.
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Right Column: Cyan Blue Device Card */}
+            <div className="lg:col-span-5">
+              <div className="bg-[#419DFF] p-6 rounded-sm shadow-xl aspect-square flex items-center justify-center">
+                <div className="overflow-hidden rounded-sm w-full h-full">
+                  <img
+                    src="https://images.unsplash.com/photo-1615247001958-f4bc92fa6a4a?w=900&q=80"
+                    alt="Synthesizer audio controller"
+                    className="w-full h-full object-cover filter contrast-[1.02]"
+                  />
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════
-          SECTION 5 — BUILT FROM THE GAP  (Dark #111111 w/ glow CTA)
+          SECTION 5 — EMOTION & LICENSING (Warm Off-white `#F5F4EE`)
       ═══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-[#111111] px-6 pb-32 pt-24 lg:pb-40 lg:pt-32">
-        {/* Center glow */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#7CFF00]/5 blur-[140px]" />
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.015] blur-[80px]" />
+      <section className="bg-[#F5F4EE]">
+        <div className="mx-auto max-w-[1280px] px-6 py-16 lg:py-24">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-20 items-center">
+            
+            {/* Left Column: Bright Pink Artist Grid */}
+            <div className="lg:col-span-5 order-last lg:order-first">
+              <div className="bg-[#FF6097] p-6 rounded-sm shadow-xl aspect-square grid grid-cols-2 gap-4">
+                <img 
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=80" 
+                  alt="Artist 1" 
+                  className="w-full h-full object-cover rounded-sm filter contrast-[1.02]" 
+                />
+                <img 
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" 
+                  alt="Artist 2" 
+                  className="w-full h-full object-cover rounded-sm filter contrast-[1.02]" 
+                />
+                <img 
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80" 
+                  alt="Artist 3" 
+                  className="w-full h-full object-cover rounded-sm filter contrast-[1.02]" 
+                />
+                <img 
+                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80" 
+                  alt="Artist 4" 
+                  className="w-full h-full object-cover rounded-sm filter contrast-[1.02]" 
+                />
+              </div>
+            </div>
 
-        <div className="relative z-10 mx-auto max-w-[860px] text-center">
+            {/* Right Column: Why Us Info Continued */}
+            <div className="lg:col-span-7">
+              <span className="text-[11px] font-bold tracking-[0.25em] text-[#0C0C0E]/50 uppercase mb-4 block">
+                Built For Creators
+              </span>
+              <h2 className="text-[clamp(24px,3vw,38px)] font-bold tracking-tight text-[#0C0C0E] leading-tight mb-10">
+                Organized by feel, licensed with absolute clarity.
+              </h2>
+              
+              <div className="space-y-10 max-w-xl">
+                
+                {/* Item 3 */}
+                <div className="group">
+                  <div className="flex items-center gap-3 text-[16px] font-bold text-[#0C0C0E]">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-sm bg-[#0C0C0E]/5 text-[#0C0C0E] border border-[#0C0C0E]/10 transition-colors group-hover:bg-[#7CFF00]/10 group-hover:border-[#7CFF00]/25 group-hover:text-black">
+                      <Heart className="h-4.5 w-4.5" strokeWidth={1.5} />
+                    </div>
+                    <h3>Emotion-driven tracks</h3>
+                  </div>
+                  <p className="text-[14px] text-[#0C0C0E]/60 leading-relaxed mt-2.5 pl-12 font-normal">
+                    Music organised by feel, pacing, and narrative—not just genre tags. Find the right sound faster, every time.
+                  </p>
+                </div>
 
-          <span className="mb-6 block text-[10px] font-black uppercase tracking-[0.4em] text-white/25">
-            The Mission
-          </span>
+                {/* Item 4 */}
+                <div className="group">
+                  <div className="flex items-center gap-3 text-[16px] font-bold text-[#0C0C0E]">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-sm bg-[#0C0C0E]/5 text-[#0C0C0E] border border-[#0C0C0E]/10 transition-colors group-hover:bg-[#7CFF00]/10 group-hover:border-[#7CFF00]/25 group-hover:text-black">
+                      <ShieldCheck className="h-4.5 w-4.5" strokeWidth={1.5} />
+                    </div>
+                    <h3>Creator-friendly access</h3>
+                  </div>
+                  <p className="text-[14px] text-[#0C0C0E]/60 leading-relaxed mt-2.5 pl-12 font-normal">
+                    Clear, uncomplicated licensing. Use it on YouTube, podcasts, ads, and client work without chasing claims.
+                  </p>
+                </div>
 
-          <p className="mx-auto max-w-2xl text-[clamp(18px,2.5vw,26px)] font-medium leading-relaxed text-white/55">
-            Tracknit was born from the space between storytelling and sound—the exact moment
-            where most creators feel something missing but can&apos;t quite name it.
-          </p>
+              </div>
+            </div>
 
-          <p className="mx-auto mt-6 max-w-xl text-[clamp(16px,2vw,20px)] font-medium leading-relaxed text-white/40">
-            This platform exists to fill that gap, helping stories breathe, flow,
-            and connect more deeply.
-          </p>
+          </div>
+        </div>
+      </section>
 
-          {/* Divider */}
-          <div className="mx-auto my-14 h-px w-24 bg-white/10" />
-
-          {/* Closing statement */}
-          <h2 className="text-[clamp(48px,7vw,96px)] font-black italic leading-[0.9] tracking-[-0.05em] text-white">
-            Welcome to
-            <br />
-            <span className="text-[#7CFF00] not-italic">Tracknit.</span>
-          </h2>
-
-          <p className="mx-auto mt-8 max-w-md text-[15px] font-medium text-white/35">
-            If sound matters to your story, you&apos;re already in the right place.
-          </p>
-
-          {/* CTAs */}
-          <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link
-              href="/library/royalty-free-music"
-              className="flex items-center gap-2 rounded-full bg-[#7CFF00] px-10 py-4 text-[11px] font-bold uppercase tracking-[0.15em] text-black shadow-lg shadow-[#7CFF00]/20 transition-all hover:scale-105"
-            >
-              Browse Music <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-            <Link
-              href="/pricing"
-              className="flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-10 py-4 text-[11px] font-bold uppercase tracking-[0.15em] text-white/70 transition-all hover:border-white/30 hover:bg-white/[0.08] hover:text-white"
-            >
-              View Plans
-            </Link>
+      {/* ═══════════════════════════════════════════════
+          SECTION 6 — HOW IT WORKS (Warm Off-white `#F5F4EE`)
+      ═══════════════════════════════════════════════ */}
+      <section className="bg-[#F5F4EE] border-t border-[#0C0C0E]/5">
+        <div className="mx-auto max-w-[1280px] px-6 py-20 lg:py-28">
+          
+          {/* Centered Heading */}
+          <div className="text-center mb-16 lg:mb-20">
+            <span className="text-[11px] font-bold tracking-[0.25em] text-[#0C0C0E]/50 uppercase mb-4 block">
+              Workflow
+            </span>
+            <h2 className="text-[clamp(28px,3.5vw,44px)] font-bold tracking-tight text-[#0C0C0E]">
+              Here&apos;s how it works
+            </h2>
           </div>
 
+          {/* Three Column Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+            
+            {/* Step 1 */}
+            <div className="border-t border-[#0C0C0E]/10 pt-8">
+              <span className="text-[11px] font-bold tracking-widest text-[#0C0C0E]/40 mb-4 block">
+                01 / SIGN UP
+              </span>
+              <h3 className="text-lg font-bold text-[#0C0C0E] mb-3">
+                Sign up
+              </h3>
+              <p className="text-[14px] text-[#0C0C0E]/60 leading-relaxed mb-6 font-normal">
+                Create a free account in seconds to start auditioning tracks and organizing your projects.
+              </p>
+              <Link 
+                href="/register" 
+                className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#0C0C0E] hover:underline"
+              >
+                Create free account <ArrowRight className="h-3 w-3" />
+              </Link>
+            </div>
+
+            {/* Step 2 */}
+            <div className="border-t border-[#0C0C0E]/10 pt-8">
+              <span className="text-[11px] font-bold tracking-widest text-[#0C0C0E]/40 mb-4 block">
+                02 / FIND
+              </span>
+              <h3 className="text-lg font-bold text-[#0C0C0E] mb-3">
+                Find your sound
+              </h3>
+              <p className="text-[14px] text-[#0C0C0E]/60 leading-relaxed mb-6 font-normal">
+                Search by mood, pace, or cinematic vibe. Audition tracks instantly in our high-performance library.
+              </p>
+              <Link 
+                href="/library/royalty-free-music" 
+                className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#0C0C0E] hover:underline"
+              >
+                Browse music <ArrowRight className="h-3 w-3" />
+              </Link>
+            </div>
+
+            {/* Step 3 */}
+            <div className="border-t border-[#0C0C0E]/10 pt-8">
+              <span className="text-[11px] font-bold tracking-widest text-[#0C0C0E]/40 mb-4 block">
+                03 / CHOOSE
+              </span>
+              <h3 className="text-lg font-bold text-[#0C0C0E] mb-3">
+                Soundtrack your story, worry-free
+              </h3>
+              <p className="text-[14px] text-[#0C0C0E]/60 leading-relaxed mb-6 font-normal">
+                Download tracks and publish your content anywhere with complete peace of mind, protected by our clear license.
+              </p>
+              <Link 
+                href="/pricing" 
+                className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#0C0C0E] hover:underline"
+              >
+                View plans <ArrowRight className="h-3 w-3" />
+              </Link>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════
+          SECTION 7 — COMPANY INFO & CTA (Contrast Flip to Deep Charcoal `#0C0C0E`)
+      ═══════════════════════════════════════════════ */}
+      <section className="bg-[#0C0C0E] text-white">
+        <div className="mx-auto max-w-[1280px] px-6 py-20 lg:py-32">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-24 items-center">
+            
+            {/* Left Column: Company Info and Call to Action */}
+            <div className="lg:col-span-7">
+              <span className="text-[11px] font-bold tracking-[0.25em] text-[#7CFF00] uppercase mb-4 block">
+                Corporate Profile
+              </span>
+              <h2 className="text-[clamp(28px,3.5vw,44px)] font-bold tracking-tight text-white leading-tight mb-8">
+                Company Information
+              </h2>
+              
+              {/* Structured Metadata Table */}
+              <div className="space-y-4 border-t border-white/10 pt-6 max-w-xl text-sm font-normal">
+                <div className="flex justify-between py-2 border-b border-white/5">
+                  <span className="text-white/40">Founder</span>
+                  <span className="text-white/80 font-medium">Tarun Rao</span>
+                </div>
+                <div className="flex justify-between py-2 border-b border-white/5">
+                  <span className="text-white/40">Headquarters</span>
+                  <span className="text-white/80 font-medium">Pune, India</span>
+                </div>
+                <div className="flex justify-between py-2 border-b border-white/5">
+                  <span className="text-white/40">Focus</span>
+                  <span className="text-white/80 font-medium">Premium Music Licensing &amp; Sound Design</span>
+                </div>
+                <div className="flex justify-between py-2 border-b border-white/5">
+                  <span className="text-white/40">Mission</span>
+                  <span className="text-white/80 font-medium text-right max-w-xs">
+                    To fill the space between storytelling and sound.
+                  </span>
+                </div>
+                <div className="flex justify-between py-2 border-b border-white/5">
+                  <span className="text-white/40">Support Inquiry</span>
+                  <span className="text-white/80 font-medium">contact@tracknit.com</span>
+                </div>
+              </div>
+
+              {/* Final CTA Statement */}
+              <div className="mt-14 max-w-xl">
+                <h3 className="text-xl font-bold tracking-tight text-white">
+                  Welcome to Tracknit.
+                </h3>
+                <p className="text-sm text-white/50 mt-2 font-normal">
+                  If sound matters to your story, you&apos;re already in the right place.
+                </p>
+                <div className="mt-8 flex flex-wrap gap-4">
+                  <Link
+                    href="/library/royalty-free-music"
+                    className="bg-[#7CFF00] text-[#0C0C0E] px-8 py-3.5 text-xs font-bold tracking-wider uppercase rounded-sm hover:bg-[#6AD400] transition-all"
+                  >
+                    Browse Music
+                  </Link>
+                  <Link
+                    href="/pricing"
+                    className="border border-white/20 bg-white/5 text-white px-8 py-3.5 text-xs font-bold tracking-wider uppercase rounded-sm hover:bg-white/10 hover:border-white/35 transition-all"
+                  >
+                    View Plans
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Yellow Dials Card */}
+            <div className="lg:col-span-5">
+              <div className="bg-[#FFD12F] p-6 rounded-sm shadow-2xl aspect-square flex items-center justify-center">
+                <div className="overflow-hidden rounded-sm w-full h-full">
+                  <img
+                    src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=900&q=80"
+                    alt="Synthesizer dialboard"
+                    className="w-full h-full object-cover filter contrast-[1.02]"
+                  />
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
