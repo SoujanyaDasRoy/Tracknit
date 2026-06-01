@@ -64,11 +64,11 @@ export default function MyAccountPage() {
   const roleName = (session.user as any).role || "subscriber";
 
   return (
-    <div className="flex bg-[#111111] text-white font-sans min-h-screen">
+    <div className="flex bg-[#111111] text-white font-sans min-h-screen pt-[64px]">
       {/* Mobile Overlay */}
       {sidebarOpen && (
         <div 
-          className="fixed inset-0 bg-black/80 z-50 lg:hidden backdrop-blur-sm transition-opacity duration-300"
+          className="fixed inset-x-0 bottom-0 top-[64px] bg-black/80 z-50 lg:hidden backdrop-blur-sm transition-opacity duration-300"
           onClick={() => setSidebarOpen(false)}
         />
       )}
@@ -76,7 +76,7 @@ export default function MyAccountPage() {
       {/* ═══════════════════════════════════════════════
           SIDEBAR
       ═══════════════════════════════════════════════ */}
-      <aside className={`w-[260px] flex-shrink-0 flex flex-col h-screen bg-[#181818] border-r border-white/[0.07] fixed top-0 left-0 z-50 transition-transform duration-300 lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+      <aside className={`w-[260px] flex-shrink-0 flex flex-col h-[calc(100vh-64px)] bg-[#181818] border-r border-white/[0.07] fixed top-[64px] left-0 z-50 transition-transform duration-300 lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="h-[64px] px-6 flex items-center justify-between shrink-0 border-b border-white/[0.07]">
           <Link href="/">
             <img alt="Tracknit" className="h-[36px] w-auto object-contain" src="/logo-header.png" />
@@ -114,7 +114,7 @@ export default function MyAccountPage() {
       ═══════════════════════════════════════════════ */}
       <div className="flex-grow lg:pl-[260px] flex flex-col min-h-screen w-full">
         {/* TOP NAV */}
-        <header className="h-[64px] flex items-center justify-between px-6 lg:px-10 bg-[#181818]/95 backdrop-blur-md border-b border-white/[0.07] sticky top-0 z-40">
+        <header className="h-[64px] flex items-center justify-between px-6 lg:px-10 bg-[#181818]/95 backdrop-blur-md border-b border-white/[0.07] sticky top-[64px] z-40">
           <div className="flex items-center gap-8">
             <button className="lg:hidden text-white/50 hover:text-white mr-4 cursor-pointer" onClick={() => setSidebarOpen(true)}>
               <Menu className="h-6 w-6" />
