@@ -324,31 +324,44 @@ export default function RoyaltyFreeMusicPage() {
 
   // Filtered & Sorted Tracks
   const filteredTracks = useMemo(() => {
+    const parseDurationToSeconds = (durationStr?: string): number => {
+      if (!durationStr) return 0;
+      const parts = durationStr.split(':').map(Number);
+      if (parts.length === 2) return (parts[0] || 0) * 60 + (parts[1] || 0);
+      return Number(durationStr) || 0;
+    };
+
     let result = tracks.filter((t) => {
+      const trackGenres = t.genre ?? [];
+      const trackMoods = t.moods ?? [];
+      const trackUseCases = t.useCases ?? [];
+      const trackTags = t.tags ?? [];
+
       const matchesSearch =
         !searchQuery ||
         t.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         t.artist.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        t.genre.some((g) => g.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        (t.moods && t.moods.some((m) => m.toLowerCase().includes(searchQuery.toLowerCase())));
+        trackGenres.some((g) => g.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        trackMoods.some((m) => m.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      const matchesCollection = selectedCollection === "All" || t.genre.includes(selectedCollection);
-      const matchesMood = selectedMood === "All" || (t.moods && t.moods.includes(selectedMood));
-      const matchesCharacteristic = selectedCharacteristic === "All" || (t.useCases && t.useCases.includes(selectedCharacteristic));
-      const matchesGenre = selectedGenre === "All" || t.genre.includes(selectedGenre);
-      const matchesEnergy = selectedEnergy === "All" || (t.tags && t.tags.includes(selectedEnergy));
-      const matchesInstrument = selectedInstrument === "All" || (t.tags && t.tags.includes(selectedInstrument));
+      const matchesCollection = selectedCollection === "All" || trackGenres.includes(selectedCollection);
+      const matchesMood = selectedMood === "All" || trackMoods.includes(selectedMood);
+      const matchesCharacteristic = selectedCharacteristic === "All" || trackUseCases.includes(selectedCharacteristic);
+      const matchesGenre = selectedGenre === "All" || trackGenres.includes(selectedGenre);
+      const matchesEnergy = selectedEnergy === "All" || trackTags.includes(selectedEnergy);
+      const matchesInstrument = selectedInstrument === "All" || trackTags.includes(selectedInstrument);
       const matchesKey = selectedKey === "All" || t.keySig === selectedKey;
       const matchesArtist = selectedArtist === "All" || t.artist === selectedArtist;
-      const matchesPlaylist = selectedPlaylist === "All" || (t.tags && t.tags.includes(selectedPlaylist));
+      const matchesPlaylist = selectedPlaylist === "All" || trackTags.includes(selectedPlaylist);
       const matchesVocal = selectedVocal === "All" || (selectedVocal === "Instrumental" ? !t.vocals : t.vocals);
       
+      const seconds = parseDurationToSeconds(t.duration);
       const matchesDuration =
         selectedDuration === "All" ||
-        (selectedDuration === "< 2:30" && t.duration && t.duration < "2:30") ||
-        (selectedDuration === "2:30 – 3:15" && t.duration && t.duration >= "2:30" && t.duration <= "3:15") ||
-        (selectedDuration === "3:15 – 4:00" && t.duration && t.duration >= "3:15" && t.duration <= "4:00") ||
-        (selectedDuration === "> 4:00" && t.duration && t.duration > "4:00");
+        (selectedDuration === "< 2:30" && seconds < 150) ||
+        (selectedDuration === "2:30 – 3:15" && seconds >= 150 && seconds <= 195) ||
+        (selectedDuration === "3:15 – 4:00" && seconds >= 195 && seconds <= 240) ||
+        (selectedDuration === "> 4:00" && seconds > 240);
 
       const hasCoverArt = !!t.image && t.image.trim() !== "";
 

@@ -413,22 +413,33 @@ export default function SoundEffectsLibraryPage() {
 
   // Filtered & Sorted Tracks
   const filteredTracks = useMemo(() => {
+    const parseDurationToSeconds = (durationStr?: string): number => {
+      if (!durationStr) return 0;
+      const parts = durationStr.split(':').map(Number);
+      if (parts.length === 2) return (parts[0] || 0) * 60 + (parts[1] || 0);
+      return Number(durationStr) || 0;
+    };
+
     let result = sfxTracks.filter((t) => {
+      const trackGenres = t.genre ?? [];
+      const trackMoods = t.moods ?? [];
+
       const matchesSearch =
         !searchQuery ||
         t.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         t.artist.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        t.genre.some((g) => g.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        (t.moods && t.moods.some((m) => m.toLowerCase().includes(searchQuery.toLowerCase())));
+        trackGenres.some((g) => g.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        trackMoods.some((m) => m.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      const matchesCategory = selectedCategory === "All" || t.genre.includes(selectedCategory);
-      const matchesMood = selectedMood === "All" || (t.moods && t.moods.includes(selectedMood));
+      const matchesCategory = selectedCategory === "All" || trackGenres.includes(selectedCategory);
+      const matchesMood = selectedMood === "All" || trackMoods.includes(selectedMood);
 
+      const seconds = parseDurationToSeconds(t.duration);
       const matchesDuration =
         selectedDuration === "All" ||
-        (selectedDuration === "< 5s" && t.duration && t.duration <= "0:05") ||
-        (selectedDuration === "5s - 30s" && t.duration && t.duration > "0:05" && t.duration <= "0:30") ||
-        (selectedDuration === "> 30s" && t.duration && t.duration > "0:30");
+        (selectedDuration === "< 5s" && seconds < 5) ||
+        (selectedDuration === "5s - 30s" && seconds >= 5 && seconds <= 30) ||
+        (selectedDuration === "> 30s" && seconds > 30);
 
       const hasCoverArt = !!t.image && t.image.trim() !== "";
       return matchesSearch && matchesCategory && matchesMood && matchesDuration && hasCoverArt;
