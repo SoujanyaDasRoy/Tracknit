@@ -322,7 +322,7 @@ export default function AdminDashboard() {
         {/* Logo + Admin Badge */}
         <div className="px-5 flex items-center gap-3 h-[64px] shrink-0 border-b border-white/[0.04]">
           <Link href="/" className="hover:opacity-80 transition-opacity">
-            <img src="/logo.svg" alt="TracKnit" className="h-7 w-auto object-contain" />
+            <img src="/logo-header.png" alt="TracKnit" className="h-7 w-auto object-contain" />
           </Link>
           <span className="text-[9px] font-bold bg-primary/15 text-primary px-2 py-0.5 rounded-md uppercase tracking-wider">Admin</span>
         </div>

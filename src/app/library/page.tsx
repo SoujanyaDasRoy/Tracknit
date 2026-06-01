@@ -261,7 +261,7 @@ export default function LibraryOverviewPage() {
         <div className="mx-auto flex h-full max-w-[1680px] items-center justify-between px-6 lg:px-10">
           <div className="flex items-center gap-8">
             <Link href="/" className="flex items-center gap-2 mr-2">
-              <img src="/logo.svg" alt="Tracknit" className="h-[36px] w-auto object-contain" />
+              <img src="/logo-header.png" alt="Tracknit" className="h-[36px] w-auto object-contain" />
             </Link>
             <nav className="hidden md:flex items-center gap-8">
               <Link href="/library" className="text-xs uppercase tracking-widest font-body font-normal text-white transition-colors">

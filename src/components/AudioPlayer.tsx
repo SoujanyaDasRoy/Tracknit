@@ -1222,7 +1222,7 @@ export default function AudioPlayer() {
                 {/* Expanded Top Header panel */}
                 <div className="h-[64px] border-b border-white/[0.06] px-8 flex items-center justify-between shrink-0 bg-[#121316]">
                   <div className="flex items-center gap-3.5">
-                    <img alt="Tracknit" className="h-[32px] w-auto object-contain" src="/logo.svg" />
+                    <img alt="Tracknit" className="h-[32px] w-auto object-contain" src="/logo-header.png" />
                     <span className="px-2 py-0.5 bg-[#00E58C]/10 border border-[#00E58C]/25 text-[8px] font-black uppercase text-[#00E58C] rounded tracking-widest mt-0.5 leading-none">
                       Creator Workstation
                     </span>

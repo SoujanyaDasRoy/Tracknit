@@ -46,7 +46,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center px-6 py-3 max-w-[1440px] mx-auto relative z-10">
           <div className="flex items-center gap-12">
             <Link href="/" className="flex items-center shrink-0">
-              <img alt="Tracknit" className="h-[38px] w-auto object-contain" src="/logo.svg" />
+              <img alt="Tracknit" className="h-[38px] w-auto object-contain" src="/logo-header.png" />
             </Link>
             <div className="hidden md:flex gap-8 items-center">
               {NAV_LINKS.map((link) => (

@@ -63,7 +63,7 @@ export default function Footer() {
             <img
               alt="Tracknit"
               className="h-[38px] w-auto mb-6 object-contain"
-              src="/logo.svg"
+              src="/logo-header.png"
             />
             <p className="text-white/90 text-sm font-normal leading-relaxed max-w-xs">
               Royalty-free music and sound effects for creators. Cleared for every platform.
