@@ -16,6 +16,7 @@ export type LibraryTrack = Track & {
   type?: string;
   explicit?: boolean;
   vocals?: boolean;
+  energy?: string;
 };
 
 type R2ManifestTrack = Partial<LibraryTrack> & {

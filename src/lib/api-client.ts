@@ -1,6 +1,11 @@
 import { getSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./auth";
+import { cache } from "react";
+
+export const getCachedServerSession = cache(async () => {
+  return await getServerSession(authOptions);
+});
 
 const API_BASE_URL = "/api/backend";
 
@@ -32,7 +37,7 @@ export async function apiFetch(endpoint: string, options: FetchOptions = {}) {
     } else if (isServer) {
       // Server-side (Server Components, API routes)
       try {
-        const session = await getServerSession(authOptions);
+        const session = await getCachedServerSession();
         // @ts-ignore
         if (session?.accessToken) {
           // @ts-ignore
