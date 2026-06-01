@@ -417,7 +417,7 @@ export function TrackRow({
             <div className="p-7 grid grid-cols-1 lg:grid-cols-12 gap-8 text-left">
               
               {/* Column 1: Detailed Metadata Specs (4/12) */}
-              <div className={`lg:col-span-4 space-y-5 pr-6 border-r ${
+              <div className={`lg:col-span-4 space-y-5 lg:pr-6 lg:border-r max-lg:pb-6 max-lg:border-b ${
                 theme === "light" ? "border-black/[0.05]" : "border-white/[0.05]"
               }`}>
                 <div>
@@ -478,7 +478,7 @@ export function TrackRow({
               </div>
 
               {/* Column 2: Versions & Download formats (4/12) */}
-              <div className={`lg:col-span-4 space-y-5 px-6 border-r ${
+              <div className={`lg:col-span-4 space-y-5 lg:px-6 lg:border-r max-lg:py-6 max-lg:border-b ${
                 theme === "light" ? "border-black/[0.05]" : "border-white/[0.05]"
               }`}>
                 {/* Alternate Edit Versions */}
@@ -551,7 +551,7 @@ export function TrackRow({
               </div>
 
               {/* Column 3: Recommendations & Primary licensing Buy (4/12) */}
-              <div className="lg:col-span-4 space-y-6 pl-6 flex flex-col justify-between">
+              <div className="lg:col-span-4 space-y-6 lg:pl-6 max-lg:pt-6 flex flex-col justify-between">
                 
                 {/* Similar Tracks discover panel */}
                 <div className="space-y-3.5 flex-1">

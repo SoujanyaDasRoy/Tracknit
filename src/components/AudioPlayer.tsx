@@ -956,7 +956,7 @@ export default function AudioPlayer() {
                   animate={{ x: 0 }}
                   exit={{ x: 380 }}
                   transition={{ type: "spring", stiffness: 380, damping: 35 }}
-                  className="fixed right-0 top-0 bottom-0 w-[380px] bg-[#121316] border-l border-white/[0.08] p-6 z-[130] pointer-events-auto overflow-y-auto text-left shadow-2xl flex flex-col justify-between"
+                  className="fixed right-0 top-0 bottom-0 w-full max-w-[380px] bg-[#121316] border-l border-white/[0.08] p-6 z-[130] pointer-events-auto overflow-y-auto text-left shadow-2xl flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-8">
@@ -1060,7 +1060,7 @@ export default function AudioPlayer() {
                   animate={{ x: 0 }}
                   exit={{ x: 380 }}
                   transition={{ type: "spring", stiffness: 380, damping: 35 }}
-                  className="fixed right-0 top-0 bottom-0 w-[380px] bg-[#121316] border-l border-white/[0.08] p-6 z-[130] pointer-events-auto overflow-y-auto text-left shadow-2xl flex flex-col justify-between"
+                  className="fixed right-0 top-0 bottom-0 w-full max-w-[380px] bg-[#121316] border-l border-white/[0.08] p-6 z-[130] pointer-events-auto overflow-y-auto text-left shadow-2xl flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-8">

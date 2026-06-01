@@ -328,7 +328,7 @@ export default function ArtistProfilePage() {
           {libraryTracks.length > 0 ? (
             <div className="border border-white/[0.05] rounded-2xl overflow-hidden bg-white/[0.01]">
               {/* Header Titles */}
-              <div className="grid grid-cols-[minmax(220px,320px)_minmax(340px,1fr)_56px_minmax(0,220px)_auto] items-center gap-4 px-5 py-3 border-b border-white/[0.04] text-[10px] font-bold text-neutral-600 uppercase tracking-widest">
+              <div className="hidden lg:grid grid-cols-[minmax(220px,320px)_minmax(340px,1fr)_56px_minmax(0,220px)_auto] items-center gap-4 px-5 py-3 border-b border-white/[0.04] text-[10px] font-bold text-neutral-600 uppercase tracking-widest">
                 <span>Song / Artist</span>
                 <span className="hidden lg:block text-left">Interactive Spectrogram</span>
                 <span className="hidden lg:block text-right">Length</span>
