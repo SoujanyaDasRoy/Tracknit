@@ -541,7 +541,7 @@ export default function RoyaltyFreeMusicPage() {
             </button>
             <nav className="hidden lg:flex items-center gap-8">
               {isLoggedIn ? (
-                <Link href="/my-account" className="text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-white transition-colors">Dashboard</Link>
+                <Link href="/library" className="text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-white transition-colors">Dashboard</Link>
               ) : (
                 <Link href="/library" className="text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-white transition-colors">Discover</Link>
               )}

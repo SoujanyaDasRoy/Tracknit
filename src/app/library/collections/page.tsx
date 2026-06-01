@@ -97,7 +97,7 @@ export default function CollectionsPage() {
             </button>
             <nav className="hidden lg:flex items-center gap-8">
               {isLoggedIn ? (
-                <Link href="/my-account" className="text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-[#7CFF00] transition-colors">Dashboard</Link>
+                <Link href="/library" className="text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-[#7CFF00] transition-colors">Dashboard</Link>
               ) : (
                 <Link href="/library" className="text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-[#7CFF00] transition-colors">Discover</Link>
               )}

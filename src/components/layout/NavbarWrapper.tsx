@@ -12,7 +12,8 @@ export default function NavbarWrapper() {
     pathname?.startsWith("/sfx") || 
     pathname?.startsWith("/browse") || 
     pathname?.startsWith("/library") ||
-    pathname?.startsWith("/admin");
+    pathname?.startsWith("/admin") ||
+    pathname?.startsWith("/my-account");
 
   const isAuthRoute =
     pathname?.startsWith("/login") ||
