@@ -36,6 +36,7 @@ export default function RootLayout({
     <html lang="en" className={cn("dark", inter.variable, spaceGrotesk.variable, bodoniModa.variable, "font-sans", geist.variable)}>
       <head>
         <link href="https://fonts.cdnfonts.com/css/roslane" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body selection:bg-[#3b82f6]/30 selection:text-white">
         <AuthProvider>

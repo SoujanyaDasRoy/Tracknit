@@ -347,7 +347,7 @@ export default function LibraryOverviewPage() {
               </p>
             </div>
             <h1 className="font-sans text-[36px] md:text-[46px] lg:text-[54px] font-black leading-[1.1] tracking-tight text-white">
-              Premium royalty free music, crafted by <span className="text-[#7CFF00] font-normal tracking-wide inline-block" style={{ fontFamily: "'Alex Brush', cursive", fontSize: "1.25em" }}>real artists</span>
+              Premium royalty free music, crafted by <span className="text-[#7CFF00] font-normal tracking-wide inline-block" style={{ fontFamily: "'Italianno', cursive", fontSize: "1.45em" }}>real artists</span>
             </h1>
             <p className="mt-4 max-w-[530px] text-[15px] md:text-[16px] leading-[1.7] text-white/70">
               Every track in our catalog is written, performed, and recorded by real musicians. No AI-generated audio, no shortcuts.
