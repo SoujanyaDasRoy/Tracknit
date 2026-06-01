@@ -572,10 +572,10 @@ export default function SoundEffectsLibraryPage() {
             {/* ── Situation 1: Not logged in ── */}
             {!isLoggedIn && (
               <>
-                <Link href="/pricing" className="text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-white transition-colors">
+                <Link href="/pricing" className="hidden sm:block text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-white transition-colors">
                   Pricing
                 </Link>
-                <Link href="/login" className="text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-white transition-colors">
+                <Link href="/login" className="hidden sm:block text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-white transition-colors">
                   Sign In
                 </Link>
                 <Link href="/signup" className="h-9 px-5 bg-white hover:bg-white/90 text-black text-xs uppercase tracking-widest font-body font-medium rounded-full flex items-center justify-center transition-colors">
@@ -587,7 +587,7 @@ export default function SoundEffectsLibraryPage() {
             {/* ── Situation 2: Logged in, not subscribed (Free) ── */}
             {isLoggedIn && !isPlanActive && (
               <>
-                <Link href="/pricing" className="text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-white transition-colors">
+                <Link href="/pricing" className="hidden sm:block text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-white transition-colors">
                   Pricing
                 </Link>
                 <Link href="/pricing" className="h-9 px-5 bg-white hover:bg-white/90 text-black text-xs uppercase tracking-widest font-body font-medium rounded-full flex items-center justify-center transition-colors">
@@ -599,7 +599,7 @@ export default function SoundEffectsLibraryPage() {
             {/* ── Situation 3: Logged in + subscribed ── */}
             {isLoggedIn && isPlanActive && (
               <>
-                <Link href="/pricing" className="text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-white transition-colors mr-2">
+                <Link href="/pricing" className="hidden sm:block text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-white transition-colors mr-2">
                   Pricing
                 </Link>
                 <Link href="/library/liked" className="h-9 px-5 bg-white hover:bg-white/90 text-black text-xs uppercase tracking-widest font-body font-medium rounded-full flex items-center justify-center transition-colors">
@@ -822,7 +822,7 @@ export default function SoundEffectsLibraryPage() {
               )}
 
               {/* Workstation Header Details */}
-              <div className="flex items-center justify-between border-b border-white/[0.045] pb-3 mb-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/[0.045] pb-3 mb-2">
                 <div className="flex items-center gap-3">
                   <h2 className="text-[16px] font-bold text-white tracking-tight">Featured Sounds</h2>
                   <span className="text-xs font-semibold text-neutral-400">({filteredTracks.length} tracks)</span>

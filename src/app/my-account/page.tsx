@@ -291,10 +291,10 @@ export default function MyAccountPage() {
 
           {/* Premium Shadcn Tabs */}
           <Tabs defaultValue="overview" className="space-y-8">
-            <TabsList className="bg-[#18181a] border border-white/[0.06] p-1 rounded-2xl w-full max-w-xl grid grid-cols-4 shadow-inner">
+            <TabsList className="bg-[#18181a] border border-white/[0.06] p-1 rounded-2xl w-full max-w-xl grid grid-cols-2 md:grid-cols-4 shadow-inner h-auto gap-1">
               <TabsTrigger value="overview" className="cursor-pointer">Overview</TabsTrigger>
               <TabsTrigger value="clearance" className="cursor-pointer">Clearance</TabsTrigger>
-              <TabsTrigger value="billing" className="cursor-pointer">Plan & Billing</TabsTrigger>
+              <TabsTrigger value="billing" className="cursor-pointer whitespace-nowrap">Plan & Billing</TabsTrigger>
               <TabsTrigger value="settings" className="cursor-pointer">Settings</TabsTrigger>
             </TabsList>
 
