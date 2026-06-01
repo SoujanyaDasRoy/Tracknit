@@ -472,7 +472,7 @@ export default function RoyaltyFreeMusicPage() {
       <aside className={`w-[260px] flex-shrink-0 flex flex-col h-screen bg-[#181818] border-r border-white/[0.07] fixed top-0 left-0 z-50 transition-transform duration-300 lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="h-[64px] px-6 flex items-center justify-between shrink-0 border-b border-white/[0.07]">
           <Link href="/">
-            <img alt="Tracknit" className="h-[36px] w-auto object-contain" src="/logo-header.png" />
+            <img alt="Tracknit" className="h-[36px] w-auto object-contain" src="/logo.svg" />
           </Link>
           <button className="lg:hidden text-white/40 hover:text-white" onClick={() => setSidebarOpen(false)}>
             <X className="h-5 w-5" />

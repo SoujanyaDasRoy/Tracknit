@@ -57,7 +57,7 @@ export default function LoginPage() {
         <div>
           <Link href="/" className="inline-flex items-center gap-2 mb-14">
             <img 
-              src="/logo-header.png" 
+              src="/logo.svg" 
               alt="Tracknit" 
               className="h-[52px] w-auto object-contain" 
             />
