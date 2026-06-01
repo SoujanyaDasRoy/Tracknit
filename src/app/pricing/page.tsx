@@ -267,12 +267,14 @@ export default function PricingPage() {
 
     try {
       setLoadingPlan(plan.key);
-      const provider = region === "IN" ? "razorpay" : "stripe";
-      const planSlug = `${plan.key}_${billingCycle}`;
 
-      const res = await apiFetch("/api/backend/payments/create-session", {
+      const res = await apiFetch("/checkout/create", {
         method: "POST",
-        body: JSON.stringify({ plan_slug: planSlug, provider }),
+        body: JSON.stringify({
+          plan_tier: plan.key,
+          billing_period: billingCycle,
+          country_code: region,
+        }),
       });
 
       if (!res.ok) throw new Error("Failed to create checkout session");
