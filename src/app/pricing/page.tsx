@@ -329,8 +329,6 @@ export default function PricingPage() {
       setLoadingPlan(null);
     }
   };
-    }
-  };
 
   const isYearly = billingCycle === "yearly";
   const locationLabel = region === "IN" ? "India Pricing" : "Global Pricing";
