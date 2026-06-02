@@ -36,12 +36,16 @@ const getInitials = (name: string) => {
 // Resolves subscription status text dynamically with correct grammar
 const getSubscriptionText = (tier: string) => {
   const t = tier.toLowerCase();
-  if (t === "free") return "You're on a Free Account";
+  if (t === "free") return "Free Plan";
   
-  // Dynamic article selection (a vs an) based on first letter of plan name
-  const article = (t.startsWith("i") || t.startsWith("a")) ? "an" : "a";
-  const planName = tier.charAt(0).toUpperCase() + tier.slice(1);
-  return `You're on ${article} ${planName} Subscription`;
+  const planNames: Record<string, string> = {
+    "basic": "Basic Plan",
+    "intermediate": "Intermediate Plan",
+    "advanced": "Advanced Plan",
+    "enterprise": "Enterprise Plan"
+  };
+  
+  return planNames[t] || `${tier} Plan`;
 };
 
 // ─── Apple/Linear Style Premium Plan Badges ──────────────────────────────────
@@ -56,11 +60,11 @@ const renderPlanBadge = (tier: string) => {
   );
 };
 
-// ─── Circular Avatar Component (Using the specified Flaticon icon) ──
+// ─── Avatar Component ─────────────────────────────────────────────────────────
 function Avatar({ src, size = 32 }: { src?: string | null; size?: number }) {
   const isFallback = !src;
-  const iconUrl = src || "https://cdn-icons-png.flaticon.com/512/16797/16797245.png";
-  
+  const iconUrl = src || "";
+
   return (
     <div className="relative shrink-0 select-none font-[Inter,sans-serif]" style={{ width: size, height: size }}>
       {/* Subtle ambient white/grey halo lighting */}
@@ -76,15 +80,15 @@ function Avatar({ src, size = 32 }: { src?: string | null; size?: number }) {
           "shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.08),0_2px_12px_rgba(0,0,0,0.5)]"
         ].join(" ")}
       >
-        <img 
-          src={iconUrl} 
-          alt="avatar" 
-          className={
-            isFallback
-              ? "w-full h-full object-contain filter invert-[0.95] brightness-[1.1] opacity-90 p-[5px] transition-all duration-300"
-              : "w-full h-full object-cover transition-all duration-300"
-          }
-        />
+        {isFallback ? (
+          <span className="text-white/60 text-xs font-semibold">{getInitials("")}</span>
+        ) : (
+          <img 
+            src={iconUrl} 
+            alt="avatar" 
+            className="w-full h-full object-cover transition-all duration-300"
+          />
+        )}
         {/* Soft metallic sheen reflection overlay */}
         <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent pointer-events-none" />
       </div>
@@ -163,6 +167,7 @@ export function UserDropdown({ planTier, variant = "default" }: UserDropdownProp
   const isHighest = tier.toLowerCase() === HIGHEST_PLAN;
 
   const isSidebar = variant === "sidebar";
+
 
   // Extracts the first name from the user name
   const firstName = name.trim().split(/\s+/)[0];

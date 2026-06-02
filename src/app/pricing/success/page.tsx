@@ -36,7 +36,7 @@ export default function PricingSuccessPage() {
             // Update next-auth session to reflect new tier
             await update({ plan_tier: data.user.plan_tier });
             setTimeout(() => {
-              router.push("/library");
+              router.push("/library/royalty-free-music");
             }, 3000);
           }
         }
@@ -88,7 +88,7 @@ export default function PricingSuccessPage() {
               Your subscription is now active! You have full access to unlimited music and SFX.
             </p>
             <Link
-              href="/library"
+              href="/library/royalty-free-music"
               className="flex w-full items-center justify-center rounded-xl bg-[#7CFF00] px-6 py-3 text-[11px] font-bold uppercase tracking-[0.1em] text-black transition-transform hover:scale-105"
             >
               Go to Dashboard
@@ -99,3 +99,5 @@ export default function PricingSuccessPage() {
     </div>
   );
 }
+
+
