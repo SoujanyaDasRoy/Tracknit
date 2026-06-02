@@ -48,6 +48,11 @@ function SocialButton({
 }
 
 export default function RegisterPage() {
+  const getCallbackUrl = () => {
+    const searchParams = new URLSearchParams(window.location.search);
+    return searchParams.get("redirect") || "/library/royalty-free-music";
+  };
+
   return (
     <div className="min-h-screen flex bg-[#08080a] font-body">
       {/* ── LEFT PANEL — 35% Width Dark Auth Sidebar ────────── */}
@@ -85,17 +90,17 @@ export default function RegisterPage() {
             <SocialButton 
               icon={<GoogleIcon />} 
               label="Google" 
-              onClick={() => signIn("google", { callbackUrl: "/library/royalty-free-music" })} 
+              onClick={() => signIn("google", { callbackUrl: getCallbackUrl() })} 
             />
             <SocialButton 
               icon={<AppleIcon />} 
               label="Apple" 
-              onClick={() => signIn("apple", { callbackUrl: "/library/royalty-free-music" })} 
+              onClick={() => signIn("apple", { callbackUrl: getCallbackUrl() })} 
             />
             <SocialButton 
               icon={<DiscordIcon />} 
               label="Discord" 
-              onClick={() => signIn("discord", { callbackUrl: "/library/royalty-free-music" })} 
+              onClick={() => signIn("discord", { callbackUrl: getCallbackUrl() })} 
             />
           </div>
         </div>

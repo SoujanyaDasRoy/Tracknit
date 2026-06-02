@@ -265,6 +265,11 @@ export default function PricingPage() {
   }, []);
 
   const handleCheckout = async (plan: PricingPlan) => {
+    // Debug logging for checkout flow
+    console.log('[Checkout] Starting checkout for plan:', plan.key);
+    console.log('[Checkout] Session status:', status);
+    console.log('[Checkout] Has accessToken:', !!(session as any)?.accessToken);
+
     if (plan.custom) {
       router.push(plan.href);
       return;
@@ -275,11 +280,22 @@ export default function PricingPage() {
       return;
     }
 
+    if (!(session as any)?.accessToken) {
+      router.push(`/login?redirect=/pricing`);
+      return;
+    }
+
     try {
       setLoadingPlan(plan.key);
 
-      const res = await apiFetch("/checkout/create", {
-        method: "POST",
+      console.log('[Checkout] Calling API with:', {
+        plan_tier: plan.key,
+        billing_period: billingCycle,
+        country_code: region,
+      });
+
+      const res = await apiFetch('/checkout/create', {
+        method: 'POST',
         body: JSON.stringify({
           plan_tier: plan.key,
           billing_period: billingCycle,
@@ -287,17 +303,32 @@ export default function PricingPage() {
         }),
       });
 
-      if (!res.ok) throw new Error("Failed to create checkout session");
+      console.log('[Checkout] API Response status:', res.status);
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        console.error('[Checkout] API Error:', res.status, errorText);
+        throw new Error(`Failed to create checkout session (${res.status}): ${errorText}`);
+      }
 
       const data = await res.json();
+      console.log('[Checkout] API Response data:', data);
+
       if (data.checkout_url) {
+        console.log('[Checkout] Redirecting to:', data.checkout_url);
         window.location.href = data.checkout_url;
+      } else {
+        console.error('[Checkout] No checkout_url in response:', data);
+        throw new Error('No checkout URL received from server');
       }
     } catch (error) {
-      console.error("Checkout error:", error);
-      alert("There was an issue launching the checkout securely. Please try again.");
+      console.error('[Checkout] Full error:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      alert("Checkout error: " + errorMessage);
     } finally {
       setLoadingPlan(null);
+    }
+  };
     }
   };
 
