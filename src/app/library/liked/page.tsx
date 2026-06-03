@@ -24,17 +24,17 @@ export default function LikedPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
 
-  const isLoggedIn    = !!session?.user;
-  const planTier      = (session?.user as any)?.planTier as string | undefined;
-  const isPlanActive  = !!planTier && planTier !== "free";
+  const isLoggedIn = !!session?.user;
+  const planTier = (session?.user as any)?.planTier as string | undefined;
+  const isPlanActive = !!planTier && planTier !== "free";
 
-  const { 
-    activeTrack, 
-    isPlaying, 
-    playTrack, 
-    togglePlay, 
-    likedTrackIds, 
-    toggleLike 
+  const {
+    activeTrack,
+    isPlaying,
+    playTrack,
+    togglePlay,
+    likedTrackIds,
+    toggleLike
   } = usePlayerStore();
 
   // Authentication Guard
@@ -265,7 +265,7 @@ export default function LikedPage() {
                 <Link href="/login" className="text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-[#7CFF00] transition-colors">
                   Sign In
                 </Link>
-                <Link href="/signup" className="h-9 px-5 bg-white hover:bg-[#7CFF00] text-black text-xs uppercase tracking-widest font-body font-medium rounded-full flex items-center justify-center transition-colors">
+                <Link href="/register" className="h-9 px-5 bg-white hover:bg-[#7CFF00] text-black text-xs uppercase tracking-widest font-body font-medium rounded-full flex items-center justify-center transition-colors">
                   Get Started
                 </Link>
               </>
@@ -307,8 +307,8 @@ export default function LikedPage() {
           </div>
 
           {likedTracks.length === 0 ? (
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }} 
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               className="flex flex-col items-center justify-center py-24 px-6 rounded-3xl bg-[#181818] border border-white/[0.06] text-center"
             >
@@ -321,7 +321,7 @@ export default function LikedPage() {
             </motion.div>
           ) : (
             <div className="w-full">
-              
+
               <AnimatePresence>
                 {likedTracks.filter((item) => !!item.image && item.image.trim() !== "").map((item) => {
                   const trackId = (item.post_id || item.id).toString();

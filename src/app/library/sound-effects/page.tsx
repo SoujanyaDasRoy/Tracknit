@@ -321,19 +321,19 @@ export default function SoundEffectsLibraryPage() {
     loadTracks();
   }, []);
 
-  const { 
-    activeTrack, 
-    isPlaying, 
-    playTrack, 
-    togglePlay, 
-    likedTrackIds, 
-    toggleLike, 
-    fetchFavorites 
+  const {
+    activeTrack,
+    isPlaying,
+    playTrack,
+    togglePlay,
+    likedTrackIds,
+    toggleLike,
+    fetchFavorites
   } = usePlayerStore();
 
-  const isLoggedIn     = !!session?.user;
-  const planTier       = (session?.user as any)?.planTier as string | undefined;
-  const isPlanActive   = !!planTier && planTier !== "free";
+  const isLoggedIn = !!session?.user;
+  const planTier = (session?.user as any)?.planTier as string | undefined;
+  const isPlanActive = !!planTier && planTier !== "free";
 
   // Load User Favorites on Mount
   useEffect(() => {
@@ -578,7 +578,7 @@ export default function SoundEffectsLibraryPage() {
                 <Link href="/login" className="hidden sm:block text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-white transition-colors">
                   Sign In
                 </Link>
-                <Link href="/signup" className="h-9 px-5 bg-white hover:bg-white/90 text-black text-xs uppercase tracking-widest font-body font-medium rounded-full flex items-center justify-center transition-colors">
+                <Link href="/register" className="h-9 px-5 bg-white hover:bg-white/90 text-black text-xs uppercase tracking-widest font-body font-medium rounded-full flex items-center justify-center transition-colors">
                   Get Started
                 </Link>
               </>
@@ -733,7 +733,7 @@ export default function SoundEffectsLibraryPage() {
                     keyword: "Tech"
                   }
                 ].map((pl) => (
-                  <div 
+                  <div
                     key={pl.title}
                     onClick={() => {
                       setSearchQuery(pl.keyword);
@@ -742,12 +742,12 @@ export default function SoundEffectsLibraryPage() {
                   >
                     {/* Square Cover Art Image */}
                     <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-neutral-900 border border-white/5 shadow-[0_8px_24px_rgba(0,0,0,0.5)] transition-all duration-300 group-hover:scale-[1.015] group-hover:shadow-[0_12px_30px_rgba(0,0,0,0.7)]">
-                      <img 
-                        src={pl.image} 
-                        alt={pl.title} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                      <img
+                        src={pl.image}
+                        alt={pl.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      
+
                       {/* Circular Play Hover Accent */}
                       <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <div className="h-10 w-10 rounded-full bg-[#00E58C] text-black flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-105">
@@ -838,9 +838,9 @@ export default function SoundEffectsLibraryPage() {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="bg-[#111] border-white/10 text-white rounded-xl min-w-[120px] shadow-xl p-1">
                         {SORT_OPTIONS.map((opt) => (
-                          <DropdownMenuItem 
-                            key={opt} 
-                            onClick={() => setSortOption(opt)} 
+                          <DropdownMenuItem
+                            key={opt}
+                            onClick={() => setSortOption(opt)}
                             className={`focus:bg-white/10 rounded-lg text-xs px-3 py-2 cursor-pointer ${sortOption === opt ? "bg-white/10 text-white font-semibold" : "text-white/70 hover:text-white"}`}
                           >
                             {opt}

@@ -18,13 +18,13 @@ export default function WhitelistPage() {
   const [channels, setChannels] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  
+
   const [newChannelUrl, setNewChannelUrl] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const isLoggedIn    = !!session?.user;
-  const planTier      = (session?.user as any)?.planTier as string | undefined;
-  const isPlanActive  = !!planTier && planTier !== "free";
+  const isLoggedIn = !!session?.user;
+  const planTier = (session?.user as any)?.planTier as string | undefined;
+  const isPlanActive = !!planTier && planTier !== "free";
 
   // Authentication Guard
   useEffect(() => {
@@ -84,15 +84,15 @@ export default function WhitelistPage() {
         method: "POST",
         body: JSON.stringify({ channel_url: newChannelUrl })
       });
-      
+
       const data = await response.json();
       if (response.ok) {
         // Add to list optimistically or refetch
-        setChannels([{ 
-          id: Date.now(), 
-          channel_url: newChannelUrl, 
-          status: 'pending', 
-          created_at: new Date().toISOString() 
+        setChannels([{
+          id: Date.now(),
+          channel_url: newChannelUrl,
+          status: 'pending',
+          created_at: new Date().toISOString()
         }, ...channels]);
         setNewChannelUrl("");
       } else {
@@ -209,7 +209,7 @@ export default function WhitelistPage() {
                 <Link href="/login" className="text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-[#7CFF00] transition-colors">
                   Sign In
                 </Link>
-                <Link href="/signup" className="h-9 px-5 bg-white hover:bg-[#7CFF00] text-black text-xs uppercase tracking-widest font-body font-medium rounded-full flex items-center justify-center transition-colors">
+                <Link href="/register" className="h-9 px-5 bg-white hover:bg-[#7CFF00] text-black text-xs uppercase tracking-widest font-body font-medium rounded-full flex items-center justify-center transition-colors">
                   Get Started
                 </Link>
               </>
@@ -248,7 +248,7 @@ export default function WhitelistPage() {
           <div className="mb-10">
             <h1 className="text-3xl font-bold tracking-tight mb-2">Content ID Whitelist</h1>
             <p className="text-neutral-400 text-sm max-w-2xl">
-              Add your YouTube channels here so we can clear your videos from copyright claims. 
+              Add your YouTube channels here so we can clear your videos from copyright claims.
               Depending on your plan, you can add 1, 3, or unlimited channels.
             </p>
           </div>
@@ -295,7 +295,7 @@ export default function WhitelistPage() {
                       </>
                     )}
                   </button>
-                  
+
                   <p className="text-[10px] text-white/30 text-center leading-relaxed mt-4">
                     Once submitted, our system will review and add your channel to the Content ID safe-list within 24 hours.
                   </p>

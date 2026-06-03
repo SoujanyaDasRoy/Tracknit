@@ -560,7 +560,7 @@ export default function RoyaltyFreeMusicPage() {
                 <Link href="/login" className="hidden sm:block text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-white transition-colors">
                   Sign In
                 </Link>
-                <Link href="/signup" className="h-9 px-5 bg-white hover:bg-white/90 text-black text-xs uppercase tracking-widest font-body font-medium rounded-full flex items-center justify-center transition-colors">
+                <Link href="/register" className="h-9 px-5 bg-white hover:bg-white/90 text-black text-xs uppercase tracking-widest font-body font-medium rounded-full flex items-center justify-center transition-colors">
                   Get Started
                 </Link>
               </>

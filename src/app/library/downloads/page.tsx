@@ -21,9 +21,9 @@ export default function DownloadsPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [actionId, setActionId] = useState<string | null>(null);
 
-  const isLoggedIn    = !!session?.user;
-  const planTier      = (session?.user as any)?.planTier as string | undefined;
-  const isPlanActive  = !!planTier && planTier !== "free";
+  const isLoggedIn = !!session?.user;
+  const planTier = (session?.user as any)?.planTier as string | undefined;
+  const isPlanActive = !!planTier && planTier !== "free";
 
   // Authentication Guard
   useEffect(() => {
@@ -86,7 +86,7 @@ export default function DownloadsPage() {
         method: "POST"
       });
       const data = await response.json();
-      
+
       if (data.download_url) {
         const link = document.createElement("a");
         link.href = data.download_url;
@@ -109,7 +109,7 @@ export default function DownloadsPage() {
         method: "POST"
       });
       const data = await response.json();
-      
+
       if (data.license_url) {
         const link = document.createElement("a");
         link.href = data.license_url;
@@ -206,7 +206,7 @@ export default function DownloadsPage() {
                 <Link href="/login" className="text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-[#7CFF00] transition-colors">
                   Sign In
                 </Link>
-                <Link href="/signup" className="h-9 px-5 bg-white hover:bg-[#7CFF00] text-black text-xs uppercase tracking-widest font-body font-medium rounded-full flex items-center justify-center transition-colors">
+                <Link href="/register" className="h-9 px-5 bg-white hover:bg-[#7CFF00] text-black text-xs uppercase tracking-widest font-body font-medium rounded-full flex items-center justify-center transition-colors">
                   Get Started
                 </Link>
               </>
@@ -248,8 +248,8 @@ export default function DownloadsPage() {
           </div>
 
           {downloads.length === 0 ? (
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }} 
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               className="flex flex-col items-center justify-center py-24 px-6 rounded-3xl bg-[#181818] border border-white/[0.06] text-center"
             >

@@ -28,9 +28,9 @@ export default function CollectionsPage() {
   const [playlists, setPlaylists] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const isLoggedIn    = !!session?.user;
-  const planTier      = (session?.user as any)?.planTier as string | undefined;
-  const isPlanActive  = !!planTier && planTier !== "free";
+  const isLoggedIn = !!session?.user;
+  const planTier = (session?.user as any)?.planTier as string | undefined;
+  const isPlanActive = !!planTier && planTier !== "free";
 
   useEffect(() => {
     async function loadPlaylists() {
@@ -116,7 +116,7 @@ export default function CollectionsPage() {
                 <Link href="/login" className="text-xs uppercase tracking-widest font-body font-normal text-white/70 hover:text-[#7CFF00] transition-colors">
                   Sign In
                 </Link>
-                <Link href="/signup" className="h-9 px-5 bg-white hover:bg-[#7CFF00] text-black text-xs uppercase tracking-widest font-body font-medium rounded-full flex items-center justify-center transition-colors">
+                <Link href="/register" className="h-9 px-5 bg-white hover:bg-[#7CFF00] text-black text-xs uppercase tracking-widest font-body font-medium rounded-full flex items-center justify-center transition-colors">
                   Get Started
                 </Link>
               </>
